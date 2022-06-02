@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.server.NotAcceptableStatusException;
 import org.springframework.web.server.ResponseStatusException;
 
 import ch.fhnw.GenZ.business.service.AgentService;
@@ -99,7 +98,7 @@ public class ProductController {
 
 
 			Double maxNoOfProducts = Double.valueOf(order.getProduct().getMaxNoOfProducts());
-			Double palSize = order.getProduct().getPalletSize();
+			Double palSize = order.getProduct().getMinNrOfPalletSpaces();
 			Double orderQuantity = Double.valueOf(order.getOrderQuantity());
 
 

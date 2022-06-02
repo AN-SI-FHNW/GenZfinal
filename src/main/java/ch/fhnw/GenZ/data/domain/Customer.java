@@ -26,8 +26,7 @@ public class Customer {
 	@NotEmpty(message = "Please provide an address.")
 	private String address;
 	private String city;
-	private Double latitude;
-	private Double longitude;
+	private String canton;
 	private String country;
 
 	@ManyToOne
@@ -66,13 +65,9 @@ public class Customer {
 		this.mobile = mobile;
 	}
 
-	public String getAddress() {
-		return address;
-	}
+	public String getAddress() { return address; }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	public void setAddress(String address) { this.address = address; }
 
 	public String getCity() {
 		return city;
@@ -82,20 +77,12 @@ public class Customer {
 		this.city = city;
 	}
 
-	public Double getLatitude() {
-		return latitude;
+	public String getCanton() {
+		return mobile;
 	}
 
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	public Double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
+	public void setCanton(String canton) {
+		this.canton = canton;
 	}
 
 	public String getCountry() {
