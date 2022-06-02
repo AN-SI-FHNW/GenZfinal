@@ -1,113 +1,189 @@
 # IT_Project_Generation_Z
 
-This is a Webshop where products can be purchased. There are customer log in and administrator login with different functionalities. 
+This project focuses on a web service that calculates the shipping costs of an order.
 
 #### Contents
 - [Analysis](#analysis)
   - [Scenario](#scenario)
-  - [User Roles and Permissions](#User-Roles-and-Permissions) 
-  - [User Stories](#User-stories)
+  - [Shipping Cost Calculation](#shipping-cost-calculation)
+  - [User Roles and Permissions](#user-roles-and-permissions)
+  - [User Stories](#user-stories)
   - [Use Cases](#use-cases)
-- [Design](#design)
-  - [Prototype Design](#prototype-design)
-  - [Domain Design](#domain-design)
-  - [Business Logic Design](#business-logic-design)
-  - [Endpoint Design](#endpoint-design)
+- [Minimal Requirements](#minimal-requirements)
+  - [Architecture](#architecture)
+  - [Functional Requirements](#functional-requirements)
+  - [User Interface](#user-interface)
+- [Prototype Design](#prototype-design)
 - [Implementation](#implementation)
-  - [Backend Technology](#backend-technology)
-  - [Frontend Technology](#frontend-technology)
 - [Deployment](#deployment)
-- [User Guide](#User-guide)
+- [Installation Guide](#installation-guide)
+- [User Guide](#user-guide)
+- [Features](#features)
 - [Project Management](#project-management)
   - [Roles](#roles)
   - [Milestones](#milestones)
   - [Maintainers](#maintainers)
-  - [Licence](#licence)
-
+- [Further Development](#further-development)
+- [Resources](#Resources) 
 
 
 ## Analysis 
 
 ### Scenario
-This IT project creates a webshop that allows users with predefined administrator rights to add, edit, or delete products and to customise their personal customer data.
-Customers can create accounts, log in, change their personal information and order articles on the webshop. The corresponding shipping costs are calculated after adding specific prodcuts to their shopping cart. Our user-friendly design also provides users with a navigation bar for better navigation between the different web pages and search and sort functions in addition to a classic product description.
+The goals of this IT project is to create a webshop with different user roles (Administrator and User/Customer). The focus is not on the front-end but on the shipping cost calculation based on the the cusotmers location in Switzerlan and pallet sizes. The aim of the webshop is not that end users can order directly, but that users create customers and then place the orders. The users therefore act as a kind of intermediary.
 
-From an administrator's view, one of the most essential points of the webshop is keeping the data updated. Consequently, it is crucial to have the possibility to add more products, edit their information or delete them if they are no longer available. Furthermore, as these products can then later be purchased by customers, the shipping costs calculation must be correct.
+Keeping the data updated is an essential point from an administrator's view. Consequently, the project enables them to add more products, edit their information or delete them if they are no longer available. Administrators also can change their login credentials and see all customers and order histories.
 
-Note: There are several functions that the webshop does not support yet, as in this IT project, we focused mainly on the MVP requirements and only started working on the further ones as soon as the basic requirements were met. Many additional requirements/functionalities can later be implemented in the further development of this web application. Additionally, it is important to mention that the focus of this semester's project was on the shipping cost calculation during the ordering process.
+From a user's view, the classic functions like creating accounts, logging in, change their account information are enabled. Furthermore, they can create, edit or delete customers as they are the intermediaries. After adding products to the shopping cart, the shipping costs are calculated based on distance and pallet size.
 
+The webshop has a navigation bar at the top for fast navigation between the different web pages. Furthermore, to increase the efficiency when working with the webshop, there is the possibility to search for products or customers by their name.
+
+(Please note: There are several functions that the webshop does not support yet, as, in this IT project, we focused on the implementation of the MVP requirements and then started working on the further ones as soon as the basic requirements were met. Additionally, it is essential to mention that the focus of this semester's project was on the shipping cost calculation and not the front end and user design.)
+
+### Shipping Cost Calculation
+This project focuses on a web service that calculates shipping costs. The company sells products that cannot be sent by mail or package. The shipping costs are determined by the distance from the seller to the buyer and by the amount of space the ordered products need in the truck. 
+
+The web service calculates the shipping costs of an order according to the following conditions: 
+![image](https://user-images.githubusercontent.com/80820037/171218107-e436b6ab-2fdd-4127-ac9e-81866b504fec.png)
+
+Interpretation
+- Max 15 piece of product p3 can be shipped with 2.5 pallet spaces. If only 15 piece of product p3 is ordered an nothing else you need 3 pallet spaces because at the end of an order the pallet spaces are rounded up.
+- Max 30 pieces of product p3 can be shipped with 5 pallet spaces.
+- 1 piece of product p3 also needs 2.5 pallet spaces. 
+- It’s possible to pile different products. An order of 12 piece of p2 and 5 piece of p1 needs 4 pallet spaces. 12 piece of p2 need at least 4 pallet spaces, 5 piece of p1 need at least 1.2 pallet spaces. therefore together they need at least 4 pallet spaces. 2 products of p2 need 0.4 pallet
+spaces and 5 piece of p1 need 0.24 pallet spaces, togehter 0.64 pallet spaces.
 
 ### User Roles and Permissions
 
 #### Administrator
-- Has the permission to add, edit and delete products.
-- Has the permission to see all user profiles and order histories.
+- Has the permission to add, edit and delete products
+- Has the permission to change Adminsitrator information
+- Has the permission to see all user profiles and order histories
 
-#### Customer
-- Has the permission to change personal information.
-- Has the permission to purchase prodcuts and see personal order history.
+#### User
+- Has the permission to change personal information
+- Has the permission to add, edit, delete customers
+- Has the permission to purchase prodcuts and see personal order history
 
 ### User Stories
-1. As a user, I want to have a webshop where I can search and sort products and also read products information and add them to my shopping card that I can purchase them at a wished time.
-2. As a user, I want to edit my personal information like email address, password, name, shipping address, date of birth, and also see my order history.
-3. As a user, I want to see a consistent visual appearance so that I can navigate easily with the web application. To navigate on the web application, I want to use a navigation bar to orientate myself on the web application and to access the desired part of the pages faster.
-4. As an administrator, I want to have the permission to add new products, edit or delete them. 
+1. As a user, I want to have a webshop where I can search for products, read product information and add them to my shopping cart to purchase them.
+2. As a user, I want to edit my personal information like email address, password, name and see see my order history.
+3. As a user, I want to see a consistent visual appearance so that I can navigate easily with the web application. To navigate on the web application, I want to use a navigation bar to access the desired pages faster.
+4. As an administrator, I want to have the permission to add new products, edit or delete them.
+5. As an administrator, I want to see all user profiles and order histories.
 
 ### Use Cases
 
-#### Use Cases Package 1 - Customer
-- UC-101 [Register]: The system shall allow the user (customer) to create a new account.
+#### Use Cases Package 1 - User
+- UC-101 [Register]: The system shall allow the user to create a new account.
 - UC 102 [User Login]: The system shall allow the user to log in.
-- UC 103 [Update Profile]: The system shall allow the user to change personal data like name, date of birth, shipping address, email address and a valid password.
- - UC 104 [Sort product]: The system shall allow the user to sort products based on price.
-("Start with the lowest price" or "start with the highest price")
-- UC 105 [Search product]: The system shall allow the user to search products by their name.
-- UC 106 [Shopping cart]: The system shall provide the user with the ability to add products to the shopping cart or to remove them.
-- UC 107 [Purchase product]: The system shall allow the user to purchase products.
-- UC 108 [View order history]: The system shall allow the user to see previous orders.
-- UC 109 [User logout]: The system shall allow the user to log out.
-- UC 110 [Reset password]: The system shall allow the user to reset the password.
+- UC 103 [Update Profile]: The system shall allow the user to change personal data.
+- UC 104 [Search product]: The system shall allow the user to search products by their name.
+- UC 105 [Shopping cart]: The system shall provide the user with the ability to add products to the shopping cart or to remove them.
+- UC 106 [Purchase product]: The system shall allow the user to purchase products.
+- UC 107 [View order history]: The system shall allow the user to see previous orders.
+- UC 108 [User logout]: The system shall allow the user to log out.
 
 #### Use Cases Package 2 – Administrator
 - UC 201 [Administrator login]: The system shall allow the administration to log in.
-- UC 202 [Add products]: The system shall allow the administrator to add new products to the web shop.
-- UC 203 [Edit product information]: The system shall allow the administrator to change product prices and product descriptions.
-- UC 204 [Delete product]: The system shall allow the administrator to delete products.
+- UC 202 [Add products]: The system shall allow the administrator to add, edit or delete products.
+- UC 203 [Delete product]: The system shall allow the administrator to delete products.
+- UC 204 [View orders and customers]: The system shall provide the administrator to view all cusotmers and order histories.
 - UC 205 [Administrator logout]: The system shall allow the administration to log out.
 
-## Design
+## Minimal Requirement
 
-### Prototype Design
-A bootstrap based static prototype has been created by using a prototyping application.
-In this case, the prototype application Bootstrap Studio has been used to create a basic user interface design based on an HTML grid, Bootstrap CSS and JavaScript, including the selection of web fonts and font-based icons.
-The assets (HTML, CSS, JavaScript, image and font files) has been exported and will be extended in the later during implementation with jQuery and Vue.js to build a dynamic website.
+### Architecture
+• Client-/Server implementation: Server implemented in Java and Client is browser-based (HTML / CSS / JavaScript)
+• Server-side database stores relevant data (e.g. accounts, work-times, log in/log out times, etc.)
+• Stateless communication (i.e., RESTful)
 
-### Domain Design
+### Functional Requirements
+• Web shop functionalities: Register, Login, Manage Userdata, Logout
+• Products: at least 4 Products in the web shop, products have only the properties name, max products, min number of pallet places (no price, availability, weight)
+• Shipping costs: only one warehouse location and only one provider of shipping services (one price plan). It has to work only for addresses in Switzerland
+• Design and Usability: minimal design and usability is sufficient 
 
-### Business Logic Design
+### User Interface
+• Server: Does not have a user interface and does not write to the console (no “System.out.println”). BUT: The server does write log entries to a text file (e.g. “Joe logged in”, “Michelle logged out”, etc.)
+• Client: The client runs in a standard browser and the interface is not totally ugly
 
-### Endpoint Design
+## Prototype Design
+A bootstrap based static prototype has been created by using a prototyping application "Bootstrap Studio", based on an HTML grid, Bootstrap CSS and JavaScript, including the selection of web fonts and font-based icons. 
 
 ## Implementation
-
-### Backend Technology
-This Web application is relying on…..
-
-### Frontend Technology
-This Web application is relying on the following frontend technology/libraries:
-- Bootstrap
+The assets (HTML, CSS, JavaScript, image and font files) have been exported and will be extended in the later during implementation to build a dynamic website.
 
 ## Deployment
-blablabla..
+The User Client and the Web Server are represented as the project's front-end. The Webserver will host the website. The Application Server will consist of the business logic and the data access layer. A in-memory database is used to store data.
 
-## User guide
+## Installation Guide
+1.	Open GitHub link to our project: https://github.com/kevinpini/Generation_Z_IT_Project.git
+2.	Click on “Code”, and copy the link
+3.	Open IntelliJ IDEA and click on “file”, “new”, “project from version control”
+4.	Paste the link into the “URL” space and click on “clone”
+5.	After IntelliJ has opened the project, click on the “RUN” button  
+6.	Open Google Chrome and enter “localhost:8080” into the search bar to get on the login page. 
+
+## User Guide
+Administrator Guide:
+1.	To log in as system administrator, enter localhost:8080 in the search bar of Google Chrome to get on the login page. Enter the following credentials and click on “Log In”
+Use Email: system@admin.com and Password: password
+(You will be directed to the landing page)
+2.	Click on “Products” and then on   to create new products, enter all wished product details and save it by a click on the save button 
+3.	To edit or delete an existing product, click on the corresponding button 
+To search for created products, enter the term into the search bar.
+4.	To edit the user profile, click on “My Profile” and then on “Edit Profile” in the top right corner. To log out as administrator, click on “Logout”.
+
+User (Customer) Guide:
+1.	To log in as a customer, enter localhost:8080 in the search bar of Google Chrome to get on the login page. Then, click on “Register” to register as a new customer. Enter a valid username, Email and Password and click on “register”
+2.	Enter Email and Password to login as the user you just created
+3.	Click on “Products” to see the previously created products 
+4.	To create a new customer, click on “My Customer” and click on the button:
+5.	Enter the customer information and save it by a click on the save button  
+6.	To edit or delete an existing customer, klick on the corresponding button
+To search for created customers, enter the term into the search bar. 
+7.	To enter a product to the shopping cart, click on “products” and then on  
+8.	Click on “My Cart” and then on the corresponding button to eighter proceed to checkout or to delete the item from the shopping cart. 
+9.	Select the customer and order quantity and save it by a click on the save button  
+10.	To edit the user profile, click on “My Profile” and then on “Edit Profile” in the top right corner. To log out as administrator, click on “Logout”.
+ 
+## Features
+Administrator features:
+1.	Login
+2.	Create Product
+3.	Save Product
+4.	Search Product
+5.	Edit Product
+6.	Delete Product
+7.	Logout
+8.	Edit Profile
+9.	Save Profile
+10.	See all user profiles and order histories
+11.	Logout
+
+User (customer) features
+1.	Register
+2.	Login
+3.	Create Customer
+4.	Save Customer
+5.	Search Customer
+6.	Edit Customer
+7.	Delete Customer
+8.	Edit Profile
+9.	Save Profile
+10.	Add to Shopping Cart
+11.	Delete from Shopping Cart
+12.	View Orders
+13.	Logout
 
 ## Project management
 
 ### Roles
-Andrea Simonek: Setting up GitHub Repository, writing the README.md file, coding issues related to the “user profiles” and the “ordering process”
-Kevin Pini: Coding issues about the “user profiles” and the “ordering process”
-Moana Kleiner and Carla Kaufmann: coding issues related to the products and the database.
+Andrea Simonek & Kevin Pini: Setting up GitHub Repository, writing the README.md file, coding issues related to the “user profiles” and the “ordering process”
+Moana Kleiner & Carla Kaufmann: coding issues related to the products and the database.
+Please note: All group members stay in close contact during the whole project, and there will be regular exchanges. Therefore, it is conceivable that the division depicted in the table above will not be the same as in the result. However, the comments in the source code will definitively reveal which group member
+developed which part of the code.
 
 ### Milestones
 1. **Analysis**: Scenario ideation, use case analysis and user story writing.
@@ -116,7 +192,6 @@ Moana Kleiner and Carla Kaufmann: coding issues related to the products and the 
 4. **Business Logic and API Design**: Definition of business logic and API.
 5. **Data and API Implementation**: Implementation of data access and business logic layers, and API.
 6. **Security and Frontend Implementation**: Integration of security framework and frontend realisation.
-7. **Deployment**: Deployment of Web application on cloud infrastructure.
 
 #### Maintainers
 - Andrea Alec Simonek
@@ -124,4 +199,28 @@ Moana Kleiner and Carla Kaufmann: coding issues related to the products and the 
 - Carla Kaufmann
 - Moana Kleiner
 
-#### Licence
+## Further Development
+User interface
+- Usability: Client-side data validation to prevent user mistakes
+- Appearance: Good styling (CSS), attractive interface
+- Multilingual: Two or more languages supported in the UI
+- Responsive design: also usable on mobile devices
+
+More web shop functionalities
+- Save orders / order history
+- User defined prices, discounts
+- Allow different addresses for an user (multiple shipping addresses, billing address)
+
+Support for more complex shipping cost calculations
+- more shipping service providers, with different price models (chose the cheapest one)
+- some amounts of some products may be shipped by package. E.g. 1 or 2 piece of product p1 may be shipped by package. But 1 piece of product p2 may not be shipped by package.
+- The weight of a product has an impact of the pallet spaces billed by the service provider. On one pallet space can be products of max 300 kg. otherwise an additional pallet space is billed for each additional 300 kg.
+
+Administrator Login
+- see all orders
+- manage products
+- manage users
+
+## Resources
+https://opendata.swiss/de/dataset/reisezeit-und-distanz-2017
+
