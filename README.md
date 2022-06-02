@@ -96,19 +96,19 @@ spaces and 5 piece of p1 need 0.24 pallet spaces, togehter 0.64 pallet spaces.
 ## Minimal Requirement
 
 ### Architecture
-• Client-/Server implementation: Server implemented in Java and Client is browser-based (HTML / CSS / JavaScript)
-• Server-side database stores relevant data (e.g. accounts, work-times, log in/log out times, etc.)
-• Stateless communication (i.e., RESTful)
+- Client-/Server implementation: Server implemented in Java and Client is browser-based (HTML / CSS / JavaScript)
+- Server-side database stores relevant data (e.g. accounts, work-times, log in/log out times, etc.)
+- Stateless communication (i.e., RESTful)
 
 ### Functional Requirements
-• Web shop functionalities: Register, Login, Manage Userdata, Logout
-• Products: at least 4 Products in the web shop, products have only the properties name, max products, min number of pallet places (no price, availability, weight)
-• Shipping costs: only one warehouse location and only one provider of shipping services (one price plan). It has to work only for addresses in Switzerland
-• Design and Usability: minimal design and usability is sufficient 
+- Web shop functionalities: Register, Login, Manage Userdata, Logout
+- Products: at least 4 Products in the web shop, products have only the properties name, max products, min number of pallet places (no price, availability, weight)
+- Shipping costs: only one warehouse location and only one provider of shipping services (one price plan). It has to work only for addresses in Switzerland
+- Design and Usability: minimal design and usability is sufficient 
 
 ### User Interface
-• Server: Does not have a user interface and does not write to the console (no “System.out.println”). BUT: The server does write log entries to a text file (e.g. “Joe logged in”, “Michelle logged out”, etc.)
-• Client: The client runs in a standard browser and the interface is not totally ugly
+- Server: Does not have a user interface and does not write to the console (no “System.out.println”). BUT: The server does write log entries to a text file (e.g. “Joe logged in”, “Michelle logged out”, etc.)
+- Client: The client runs in a standard browser and the interface is not totally ugly
 
 ## Prototype Design
 A bootstrap based static prototype has been created by using a prototyping application "Bootstrap Studio", based on an HTML grid, Bootstrap CSS and JavaScript, including the selection of web fonts and font-based icons. 
@@ -133,10 +133,16 @@ The user guide is a quick explanation of how to use the web shop and it is separ
 *Please note* The aim of the web shop is not that end users can order directly, but that users create customers and then place the orders. The users are the employees of the company, and the customers are the end users of the purchase product. The users act as a kind of intermediary. Therefore, administrators can create products and users can create customers and place the orders. 
 
 Administrator Guide:
+
 ![image](https://user-images.githubusercontent.com/80820037/171643514-0a8d7e25-2f65-4727-887a-831b1a9a97f8.png)
 
+
+
 User (Customer) Guide:
+
 ![image](https://user-images.githubusercontent.com/80820037/171643588-b7fd0798-84b1-4309-8886-127170c42c5f.png)
+
+
 
 ## Features
 Administrator features:
