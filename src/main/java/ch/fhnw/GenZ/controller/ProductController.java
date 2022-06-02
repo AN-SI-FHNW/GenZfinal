@@ -122,85 +122,17 @@ public class ProductController {
 			else {km = 360;}
 
 			// Get rounded up number of pallets (pal)
-			double palet = new Double (palSize / maxNoOfProducts * orderQuantity);
-			Double pal = new Double ((int) Math.round(palet));
+//			double palet = new Double (palSize / maxNoOfProducts * orderQuantity);
+			Double roundedRatio = Math.ceil(orderQuantity / maxNoOfProducts);
+			Double pal = Math.ceil(roundedRatio * palSize);
 
 			// Loop all items of transportCost to find correct item with matching km and pal
 			Double shippingCost = 0.0;
 			for (TransportCost transportCost : transportCostService.getAllTransportCost()) {
-				if (transportCost.getKm() == km && transportCost.getPal() == pal) {
+				if (transportCost.getKm().equals(km) && transportCost.getPal().equals(pal)) {
 					shippingCost = transportCost.getCost();
 					break;
 				}
-
-/*				int transportKm = transportCost.getKm();
-				switch (transportKm) {
-					case 30:
-						if(kilometers <= transportKm && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-					case 60:
-						if(kilometers <= transportKm && kilometers >30 && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-					case 90:
-						if(kilometers <= transportKm && kilometers >60 && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-					case 120:
-						if(kilometers <= transportKm && kilometers >90 && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-					case 150:
-						if(kilometers <= transportKm && kilometers >120 && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-					case 180:
-						if(kilometers <= transportKm && kilometers >150 && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-					case 210:
-						if(kilometers <= transportKm && kilometers >180 && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-					case 240:
-						if(kilometers <= transportKm && kilometers >210 && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-					case 270:
-						if(kilometers <= transportKm && kilometers >240 && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-					case 300:
-						if(kilometers <= transportKm && kilometers >270 && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-					case 330:
-						if(kilometers <= transportKm && kilometers >300 && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-					case 360:
-						if(kilometers <= transportKm && kilometers >330 && pal == transportCost.getPal()) {
-							shippingCost = transportCost.getCost();
-						}
-						break;
-				}
-				if (kilometers <= transportCost.getKm() && pal == transportCost.getPal()) {
-					shippingCost = transportCost.getCost();
-					break;
-				}
-*/
 			}
 			order.setShippingCost(shippingCost);
 			// shipping cost calculation end
