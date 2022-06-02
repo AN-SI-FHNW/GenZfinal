@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.NotAcceptableStatusException;
 import org.springframework.web.server.ResponseStatusException;
 
 import ch.fhnw.GenZ.business.service.AgentService;
@@ -93,13 +94,76 @@ public class ProductController {
 
 			// shipping cost calculation start
 			// Warehouse location is kept as fromCity which is a constant
-			String fromCity = "Zürich";
+			String fromCity = "Zürich"; //we have only 1 central warehouse in ZH
 			String toCity = order.getCustomer().getCity();
 			Distance distance = distanceService.findByToCity(fromCity, toCity);
 			Integer kilometers = distance.getKilometers();
 			Integer pal = new Double((order.getProduct().getPalletSize() * order.getOrderQuantity())).intValue();
 			Double shippingCost = 0.0;
 			for (TransportCost transportCost : transportCostService.getAllTransportCost()) {
+				int transportKm = transportCost.getKm();
+				switch (transportKm) {
+					case 30:
+						if(kilometers <= transportKm&& pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+					case 60:
+						if(kilometers <= transportKm && kilometers >30 && pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+					case 90:
+						if(kilometers <= transportKm && kilometers >60 && pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+					case 120:
+						if(kilometers <= transportKm && kilometers >90 && pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+					case 150:
+						if(kilometers <= transportKm && kilometers >120 && pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+					case 180:
+						if(kilometers <= transportKm && kilometers >150 && pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+					case 210:
+						if(kilometers <= transportKm && kilometers >180 && pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+					case 240:
+						if(kilometers <= transportKm && kilometers >210 && pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+					case 270:
+						if(kilometers <= transportKm && kilometers >240 && pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+					case 300:
+						if(kilometers <= transportKm && kilometers >270 && pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+					case 330:
+						if(kilometers <= transportKm && kilometers >300 && pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+					case 360:
+						if(kilometers <= transportKm && kilometers >330 && pal == transportCost.getPal()) {
+							shippingCost = transportCost.getCost();
+						}
+						break;
+				}
 				if (kilometers <= transportCost.getKm() && pal == transportCost.getPal()) {
 					shippingCost = transportCost.getCost();
 					break;

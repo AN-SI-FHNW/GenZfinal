@@ -22,8 +22,12 @@ public class UserController {
 	@Autowired
 	private AgentService agentService;
 
+	@Autowired
+	private LogController logController;
+
 	@GetMapping("/login")
 	public String getLoginView() {
+		logController.newlog.info("Login Page accessed!");
 		return "user/login.html";
 	}
 
@@ -34,6 +38,7 @@ public class UserController {
 
 	@GetMapping("/user/register")
 	public String getRegisterView() {
+		logController.newlog.info("Register Page accessed!");
 		return "register.html";
 	}
 
@@ -42,6 +47,7 @@ public class UserController {
 		agent.setRole(UserRole.USER);
 		try {
 			agentService.saveAgent(agent);
+			logController.newlog.info("New registration of User: " + agent.getName());
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
 		}
@@ -50,11 +56,13 @@ public class UserController {
 
 	@GetMapping("/admin/profile")
 	public String getProfileView() {
+		logController.newlog.info("Admin Profile page accessed by User: " + agentService.getCurrentAgent().getName());
 		return "../admin/adminprofile.html";
 	}
 
 	@GetMapping("/profile")
 	public @ResponseBody Agent getProfile() {
+		logController.newlog.info("Profile page accessed by User: " + agentService.getCurrentAgent().getName());
 		return agentService.getCurrentAgent();
 	}
 
@@ -74,6 +82,7 @@ public class UserController {
 
 	@GetMapping("/customer/profile")
 	public String getCustomerProfileView() {
+		logController.newlog.info("Customer Profile Page accessed by User: " + agentService.getCurrentAgent().getName());
 		return "../customer/profile.html";
 	}
 
