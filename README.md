@@ -30,7 +30,9 @@ This project focuses on a web service that calculates the shipping costs of an o
 ## Analysis 
 
 ### Scenario
-The goals of this IT project is to create a webshop with different user roles (Administrator and User/Customer). The focus is not on the front-end but on the shipping cost calculation based on the the cusotmers location in Switzerlan and pallet sizes. The aim of the webshop is not that end users can order directly, but that users create customers and then place the orders. The users therefore act as a kind of intermediary.
+The goals of this IT project is to create a webshop with different user roles (Administrator and User/Customer). Please note: The aim of the web shop is not that end users can order directly, but that users create customers and then place the orders. The users are the employees of the company, and the customers are the end users of the purchase product. The users act as a kind of intermediary. Therefore, administrators can create products and users can create customers and place the orders. 
+
+The focus is not on the front-end but on the shipping cost calculation based on the the cusotmers location in Switzerlan and pallet sizes. The aim of the webshop is not that end users can order directly, but that users create customers and then place the orders. The users therefore act as a kind of intermediary.
 
 Keeping the data updated is an essential point from an administrator's view. Consequently, the project enables them to add more products, edit their information or delete them if they are no longer available. Administrators also can change their login credentials and see all customers and order histories.
 
@@ -126,28 +128,16 @@ The User Client and the Web Server are represented as the project's front-end. T
 6.	Open Google Chrome and enter “localhost:8080” into the search bar to get on the login page. 
 
 ## User Guide
+The user guide is a quick explanation of how to use the web shop and it is separated into a user guide for administrators and one for the users. 
+
+*Please note* The aim of the web shop is not that end users can order directly, but that users create customers and then place the orders. The users are the employees of the company, and the customers are the end users of the purchase product. The users act as a kind of intermediary. Therefore, administrators can create products and users can create customers and place the orders. 
+
 Administrator Guide:
-1.	To log in as system administrator, enter localhost:8080 in the search bar of Google Chrome to get on the login page. Enter the following credentials and click on “Log In”
-Use Email: system@admin.com and Password: password
-(You will be directed to the landing page)
-2.	Click on “Products” and then on   to create new products, enter all wished product details and save it by a click on the save button 
-3.	To edit or delete an existing product, click on the corresponding button 
-To search for created products, enter the term into the search bar.
-4.	To edit the user profile, click on “My Profile” and then on “Edit Profile” in the top right corner. To log out as administrator, click on “Logout”.
+![image](https://user-images.githubusercontent.com/80820037/171643514-0a8d7e25-2f65-4727-887a-831b1a9a97f8.png)
 
 User (Customer) Guide:
-1.	To log in as a customer, enter localhost:8080 in the search bar of Google Chrome to get on the login page. Then, click on “Register” to register as a new customer. Enter a valid username, Email and Password and click on “register”
-2.	Enter Email and Password to login as the user you just created
-3.	Click on “Products” to see the previously created products 
-4.	To create a new customer, click on “My Customer” and click on the button:
-5.	Enter the customer information and save it by a click on the save button  
-6.	To edit or delete an existing customer, klick on the corresponding button
-To search for created customers, enter the term into the search bar. 
-7.	To enter a product to the shopping cart, click on “products” and then on  
-8.	Click on “My Cart” and then on the corresponding button to eighter proceed to checkout or to delete the item from the shopping cart. 
-9.	Select the customer and order quantity and save it by a click on the save button  
-10.	To edit the user profile, click on “My Profile” and then on “Edit Profile” in the top right corner. To log out as administrator, click on “Logout”.
- 
+![image](https://user-images.githubusercontent.com/80820037/171643588-b7fd0798-84b1-4309-8886-127170c42c5f.png)
+
 ## Features
 Administrator features:
 1.	Login
@@ -159,8 +149,9 @@ Administrator features:
 7.	Logout
 8.	Edit Profile
 9.	Save Profile
-10.	See all user profiles and order histories
-11.	Logout
+10.	See user profiles (and corresponding order history)
+11.	Delete user profiles (and corresponding order history)
+12.	Logout
 
 User (customer) features
 1.	Register
