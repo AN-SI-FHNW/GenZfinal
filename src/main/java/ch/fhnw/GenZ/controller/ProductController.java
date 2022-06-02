@@ -96,15 +96,47 @@ public class ProductController {
 			// Warehouse location is kept as fromCity which is a constant
 			String fromCity = "Zürich"; //we have only 1 central warehouse in ZH
 			String toCity = order.getCustomer().getCity();
+
+
+			Double maxNoOfProducts = Double.valueOf(order.getProduct().getMaxNoOfProducts());
+			Double palSize = order.getProduct().getPalletSize();
+			Double orderQuantity = Double.valueOf(order.getOrderQuantity());
+
+
+
+			// Get km category from actual distance
 			Distance distance = distanceService.findByToCity(fromCity, toCity);
 			Integer kilometers = distance.getKilometers();
-			Integer pal = new Double((order.getProduct().getPalletSize() * order.getOrderQuantity())).intValue();
+			Integer km = 0;
+			if (kilometers <= 30) {km = 30;}
+			else if (kilometers <= 60) {km = 60;}
+			else if (kilometers <= 90) {km = 90;}
+			else if (kilometers <= 120) {km = 120;}
+			else if (kilometers <= 150) {km = 150;}
+			else if (kilometers <= 180) {km = 180;}
+			else if (kilometers <= 210) {km = 210;}
+			else if (kilometers <= 240) {km = 240;}
+			else if (kilometers <= 270) {km = 270;}
+			else if (kilometers <= 300) {km = 300;}
+			else if (kilometers <= 330) {km = 330;}
+			else {km = 360;}
+
+			// Get rounded up number of pallets (pal)
+			double palet = new Double (palSize / maxNoOfProducts * orderQuantity);
+			Double pal = new Double ((int) Math.round(palet));
+
+			// Loop all items of transportCost to find correct item with matching km and pal
 			Double shippingCost = 0.0;
 			for (TransportCost transportCost : transportCostService.getAllTransportCost()) {
-				int transportKm = transportCost.getKm();
+				if (transportCost.getKm() == km && transportCost.getPal() == pal) {
+					shippingCost = transportCost.getCost();
+					break;
+				}
+
+/*				int transportKm = transportCost.getKm();
 				switch (transportKm) {
 					case 30:
-						if(kilometers <= transportKm&& pal == transportCost.getPal()) {
+						if(kilometers <= transportKm && pal == transportCost.getPal()) {
 							shippingCost = transportCost.getCost();
 						}
 						break;
@@ -168,6 +200,7 @@ public class ProductController {
 					shippingCost = transportCost.getCost();
 					break;
 				}
+*/
 			}
 			order.setShippingCost(shippingCost);
 			// shipping cost calculation end

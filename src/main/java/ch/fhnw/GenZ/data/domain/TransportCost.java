@@ -11,7 +11,7 @@ public class TransportCost {
 	@GeneratedValue
 	private Long id;
 	private Integer km;
-	private Integer pal;
+	private Double pal;
 	private Double cost;
 
 	public Long getId() {
@@ -30,11 +30,11 @@ public class TransportCost {
 		this.km = km;
 	}
 
-	public Integer getPal() {
+	public Double getPal() {
 		return pal;
 	}
 
-	public void setPal(Integer pal) {
+	public void setPal(Double pal) {
 		this.pal = pal;
 	}
 
