@@ -1,17 +1,18 @@
+<!--
+	Authors: Andrea Alec Simonek		Date: 03.06.2022
+	Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
+-->
+
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Generation Z</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.0/dist/flatly/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;display=swap">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.0/dist/flatly/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../assets/css/footer.css">
 <link rel="stylesheet" href="../assets/css/navigation.css">
 <link rel="stylesheet" href="../assets/css/styles.css">
@@ -58,59 +59,36 @@
 	<script src="../assets/js/script.js"></script>
 	<script src="../assets/js/webapp.js"></script>
 	<script>
-		$(document)
-				.ready(
-						function() {
-							$(loadData());
+		$(document).ready(function() {
+			$(loadData());
 
-							function loadData() {
-								getCustomers(function(result) {
-									$("#tableData").empty();
-									$
-											.each(
-													result,
-													function(i, item) {
-														$("#tableData")
-																.append(
-																		$(
-																				"<tr>")
-																				.append(
-																						$(
-																								"<td>")
-																								.text(
-																										item.id),
-																						$(
-																								"<td>")
-																								.text(
-																										item.name),
-																						$(
-																								"<td>")
-																								.text(
-																										item.email),
-																						$(
-																								"<td>")
-																								.text(
-																										item.mobile),
-																						$(
-																								"<td>")
-																								.html(
-																										'<div class="btn-group btn-group-sm" role="group"><a class="btn btn-light" role="button" href="/customer/edit?id='
-																												+ encodeURIComponent(item.id)
-																												+ '"> <i class="fa fa-edit"></i></a><button class="btn btn-light" data-id="2" type="button" data-bs-target="#confirm-modal" data-bs-toggle="modal"> <i class="fa fa-trash"></i></button></div>')));
-													});
+			function loadData() {
+				getCustomers(function(result) {
+					$("#tableData").empty();
+					$.each(result, function(i, item) {
+						$("#tableData")
+								.append(
+										$("<tr>").append(
+												$("<td>").text(item.id),
+												$("<td>").text(item.name),
+												$("<td>").text(item.email),
+												$("<td>").text(item.mobile),
+												$("<td>").html('<div class="btn-group btn-group-sm" role="group"><a class="btn btn-light" role="button" href="/customer/edit?id='
+														+ encodeURIComponent(item.id)
+														+ '"> <i class="fa fa-edit"></i></a><button class="btn btn-light" data-id="2" type="button" data-bs-target="#confirm-modal" data-bs-toggle="modal"> <i class="fa fa-trash"></i></button></div>')));
+					});
+				});
+			}
+
+			$("#deleteData").click(
+					function() {
+						deleteCustomer($(this).attr("data-id"),
+								function(result) {
+									$("#confirm-modal").modal("hide");
+									loadData();
 								});
-							}
-
-							$("#deleteData").click(
-									function() {
-										deleteCustomer($(this).attr("data-id"),
-												function(result) {
-													$("#confirm-modal").modal(
-															"hide");
-													loadData();
-												});
-									});
-						});
+					});
+		});
 		window.location.replace("../product");
 	</script>
 </body>

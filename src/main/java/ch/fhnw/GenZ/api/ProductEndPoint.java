@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+ * Author: Andrea Alec Simonek		Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package ch.fhnw.GenZ.api;
@@ -15,7 +15,6 @@ import ch.fhnw.GenZ.business.service.ProductService;
 import ch.fhnw.GenZ.data.domain.Product;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-
 import javax.validation.ConstraintViolationException;
 import java.net.URI;
 import java.util.List;

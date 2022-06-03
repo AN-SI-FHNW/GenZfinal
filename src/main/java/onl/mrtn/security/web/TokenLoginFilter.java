@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2019. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+ * Authors: Kevin Pini, Moana Kleiner, Carla Kaufmann, Andrea Alex Simonek
+ * Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package onl.mrtn.security.web;
@@ -13,7 +14,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;

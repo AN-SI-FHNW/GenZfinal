@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+ * Author: Kevin Pini		Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package ch.fhnw.GenZ.data.repository;
@@ -8,7 +8,6 @@ package ch.fhnw.GenZ.data.repository;
 import ch.fhnw.GenZ.data.domain.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository

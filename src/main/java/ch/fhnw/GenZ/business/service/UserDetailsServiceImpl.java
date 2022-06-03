@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2019. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+ * Author: Andrea Alec Simonek		Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package ch.fhnw.GenZ.business.service;
@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ch.fhnw.GenZ.data.domain.Agent;
 import ch.fhnw.GenZ.data.repository.AgentRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 

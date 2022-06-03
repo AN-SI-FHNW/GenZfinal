@@ -1,6 +1,6 @@
-/* Andrea & Kevin based on template from:
- * Copyright (c) 2020. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+/*
+ * Author: Kevin Pini		Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package ch.fhnw.GenZ.business.service;
@@ -17,9 +17,7 @@ import ch.fhnw.GenZ.data.domain.CustomerOrder;
 import ch.fhnw.GenZ.data.repository.AgentRepository;
 import ch.fhnw.GenZ.data.repository.CustomerOrderRepository;
 import ch.fhnw.GenZ.data.repository.CustomerRepository;
-
 import java.util.List;
-
 import javax.validation.Valid;
 import javax.validation.Validator;
 
