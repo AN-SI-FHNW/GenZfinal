@@ -16,7 +16,6 @@ This project focuses on a web service that calculates the shipping costs of an o
 - [Prototype Design](#prototype-design)
 - [Implementation](#implementation)
 - [Deployment](#deployment)
-- [Installation Guide](#installation-guide)
 - [User Guide](#user-guide)
 - [Features](#features)
 - [Project Management](#project-management)
@@ -119,7 +118,6 @@ The assets (HTML, CSS, JavaScript, image and font files) have been exported and 
 ## Deployment
 The User Client and the Web Server are represented as the project's front-end. The Webserver will host the website. The Application Server will consist of the business logic and the data access layer. A in-memory database is used to store data.
 
-
 ## User Guide
 The user guide is a quick explanation of how to use the web shop and it is separated into a user guide for administrators and one for the users. 
 
@@ -135,6 +133,8 @@ User (Customer) Guide:
 
 ![image](https://user-images.githubusercontent.com/80820037/171643588-b7fd0798-84b1-4309-8886-127170c42c5f.png)
 
+
+
 ## Features
 Administrator features:
 1.	Login
@@ -142,7 +142,7 @@ Administrator features:
 3.	Save Product
 4.	Search Product
 5.	Edit Product
-6.	Delete Product
+6.	Delete Product (only if not already stored in order history)
 7.	Logout
 8.	Edit Profile
 9.	Save Profile
@@ -210,5 +210,7 @@ Administrator Login
 - manage users
 
 ## Resources
-https://opendata.swiss/de/dataset/reisezeit-und-distanz-2017
+https://github.com/DigiPR/acrm-sandbox
+https://www.travelmath.com/distance
+
 
