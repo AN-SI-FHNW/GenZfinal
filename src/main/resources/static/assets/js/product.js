@@ -80,29 +80,18 @@ function deleteProduct(productID, callback) {
 	});
 }
 
-function getProductJSON(id, name, description, weight, maxNoOfProducts, palletSize,
-		productPrice, availableQuantity, productCategory) {
+function getProductJSON(id, name, maxNoOfProducts, minNrOfPalletSpaces) {
 	if (id === null) {
 		return JSON.stringify({
 			"name" : name,
-			"description" : description,
-			"weight" : weight,
 			"maxNoOfProducts" : maxNoOfProducts,
-			"palletSize" : palletSize,
-			"productPrice" : productPrice,
-			"availableQuantity" : availableQuantity,
-			"productCategory" : productCategory
+			"minNrOfPalletSpaces" : minNrOfPalletSpaces,
 		});
 	}
 	return JSON.stringify({
 		"id" : id,
 		"name" : name,
-		"description" : description,
-		"weight" : weight,
 		"maxNoOfProducts" : maxNoOfProducts,
-		"palletSize" : palletSize,
-		"productPrice" : productPrice,
-		"availableQuantity" : availableQuantity,
-		"productCategory" : productCategory
+		"minNrOfPalletSpaces" : minNrOfPalletSpaces,
 	});
 }

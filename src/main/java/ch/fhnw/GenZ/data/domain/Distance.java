@@ -26,16 +26,16 @@ public class Distance {
 		return fromCanton;
 	}
 
-	public void setFromCanton(String fromCity) {
-		this.fromCanton = fromCity;
+	public void setFromCanton(String fromCanton) {
+		this.fromCanton = fromCanton;
 	}
 
 	public String getToCanton() {
 		return toCanton;
 	}
 
-	public void setToCanton(String toCity) {
-		this.toCanton = toCity;
+	public void setToCanton(String toCanton) {
+		this.toCanton = toCanton;
 	}
 
 	public Integer getKilometers() {

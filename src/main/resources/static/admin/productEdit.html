@@ -3,15 +3,11 @@
 
 <head>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Generation Z</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.0/dist/flatly/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;display=swap">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.0/dist/flatly/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../assets/css/footer.css">
 <link rel="stylesheet" href="../assets/css/navigation.css">
 <link rel="stylesheet" href="../assets/css/styles.css">
@@ -22,24 +18,21 @@
 		<nav class="navbar navbar-light navbar-expand-md navigation-clean">
 			<div class="container">
 				<a class="navbar-brand" href="/">Generation Z</a>
-				<button data-bs-toggle="collapse" class="navbar-toggler"
-					data-bs-target="#navcol-1">
-					<span class="visually-hidden">Toggle navigation</span><span
-						class="navbar-toggler-icon"></span>
+				<button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+					<span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
 				</button>
-				<a class="navbar nav-item nav-link" href="/products">Products</a> <a
-					class="navbar nav-item nav-link" href="/users">Users</a> <a
-					class="navbar nav-item nav-link" href="/customers">Customers</a> <a
-					class="navbar nav-item nav-link" href="/orders">Order History</a>
+				<a class="navbar nav-item nav-link" href="/products">Products</a>
+				<a class="navbar nav-item nav-link" href="/users">Users</a>
+				<a class="navbar nav-item nav-link" href="/customers">Customers</a>
+				<a class="navbar nav-item nav-link" href="/orders">Order History</a>
 				<div class="collapse navbar-collapse" id="navcol-1">
 					<ul class="navbar-nav ms-auto">
-						<li class="nav-item dropdown"><a
-							class="dropdown-toggle nav-link" aria-expanded="false"
-							data-bs-toggle="dropdown" href="#">My Profile </a>
+						<li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">My Profile </a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="/admin/profile">Edit Profile</a><a
-									class="dropdown-item" href="/logout">Logout </a>
-							</div></li>
+								<a class="dropdown-item" href="/admin/profile">Edit Profile</a>
+								<a class="dropdown-item" href="/logout">Logout </a>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -47,65 +40,32 @@
 	</div>
 	<div class="container">
 		<div class="page-header">
-			<h2 class="text-center">
-				Edit a&nbsp;<strong>product</strong>
+			<h2 class="text-center">Edit a&nbsp;<strong>product</strong>
 			</h2>
 		</div>
 		<form id="form" method="post">
 			<div class="form-group mb-3">
 				<div class="input-group">
-					<span class="input-group-text">ID </span><input
-						class="form-control" type="text" name="id" readonly="">
+					<span class="input-group-text">ID </span>
+					<input class="form-control" type="text" name="id" readonly="">
 				</div>
 			</div>
 			<div class="form-group mb-3">
 				<div class="input-group">
-					<span class="input-group-text">Name </span><input
-						class="form-control" type="text" name="name">
+					<span class="input-group-text">Name </span>
+					<input class="form-control" type="text" name="name">
 				</div>
 			</div>
 			<div class="form-group mb-3">
 				<div class="input-group">
-					<span class="input-group-text">Description </span><input
-						class="form-control" type="text" name="description">
+					<span class="input-group-text">Max Number Of Products </span>
+					<input class="form-control" type="number" name="maxNoOfProducts">
 				</div>
 			</div>
 			<div class="form-group mb-3">
 				<div class="input-group">
-					<span class="input-group-text">Weight </span><input
-						class="form-control" type="number" name="weight">
-				</div>
-			</div>
-			<div class="form-group mb-3">
-				<div class="input-group">
-					<span class="input-group-text">Max Number Of Products </span><input
-						class="form-control" type="number" name="maxNoOfProducts">
-				</div>
-			</div>
-			<div class="form-group mb-3">
-				<div class="input-group">
-					<span class="input-group-text">Pallet Size </span><input
-						class="form-control" type="number" name="palletSize">
-				</div>
-			</div>
-			<div class="form-group mb-3">
-				<div class="input-group">
-					<span class="input-group-text">Product Price </span><input
-						class="form-control" type="number" name="productPrice">
-				</div>
-			</div>
-			<div class="form-group mb-3">
-				<div class="input-group">
-					<span class="input-group-text">Available Quantity </span><input
-						class="form-control" type="number" name="availableQuantity">
-				</div>
-			</div>
-			<div class="form-group mb-3">
-				<div class="input-group">
-					<span class="input-group-text">Product Category </span><select
-						class="form-control" name="productCategory"><option>indoor</option>
-						<option>outdoor</option>
-					</select>
+					<span class="input-group-text">minNrOfPalletSpaces </span>
+					<input class="form-control" type="decimal" name="minNrOfPalletSpaces" step ="0.1">
 				</div>
 			</div>
 			<div class="btn-group" role="group">
@@ -125,75 +85,51 @@
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #e85e6c;">
 					<h1 class="text-white">Ooops!</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<p class="text-truncate text-primary" id="error-text"></p>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-warning d-block w-100" type="button"
-						data-bs-dismiss="modal">Try Again</button>
+					<button class="btn btn-warning d-block w-100" type="button" data-bs-dismiss="modal">Try Again</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="../assets/js/app.js"></script>
 	<script src="../assets/js/product.js"></script>
 	<script src="../assets/js/script.js"></script>
 	<script src="../assets/js/webapp.js"></script>
 	<script>
-		$(document).ready(
-				function() {
-					productID = getURLParameter("id");
-					if (productID !== null) {
-						getProduct(productID, function(result) {
-							$("input[name=id]").val(result["id"]);
-							$("input[name=name]").val(result["name"]);
-							$("input[name=description]").val(
-									result["description"]);
-							$("input[name=weight]").val(result["weight"]);
-							$("input[name=maxNoOfProducts]").val(
-									result["maxNoOfProducts"]);
-							$("input[name=palletSize]").val(
-									result["palletSize"]);
-							$("input[name=productPrice]").val(
-									result["productPrice"]);
-							$("input[name=availableQuantity]").val(
-									result["availableQuantity"]);
-							$("select[name=productCategory]").val(
-									result["productCategory"]);
-						});
-					}
-
-					$("#form").submit(
-							function(event) {
-								putProduct(productID, getProductJSON($(
-										"input[name=id]").val(), $(
-										"input[name=name]").val(), $(
-										"input[name=description]").val(), $(
-										"input[name=weight]").val(), $(
-										"input[name=maxNoOfProducts]").val(),
-										$("input[name=palletSize]").val(), $(
-												"input[name=productPrice]")
-												.val(),
-										$("input[name=availableQuantity]")
-												.val(), $(
-												"select[name=productCategory]")
-												.val()), function(result) {
-									window.location.replace("/products");
-								}, function(error) {
-									$("#error-modal").modal("show");
-									$("#error-text").text(error);
-								});
-								event.preventDefault();
-							});
+		$(document).ready(function() {
+			productID = getURLParameter("id");
+			if (productID !== null) {
+				getProduct(productID, function(result) {
+					$("input[name=id]").val(result["id"]);
+					$("input[name=name]").val(result["name"]);
+					$("input[name=maxNoOfProducts]").val(result["maxNoOfProducts"]);
+					$("input[name=minNrOfPalletSpaces]").val(result["minNrOfPalletSpaces"]);
 				});
+			}
+
+			$("#form").submit(function(event) {
+				putProduct(productID, getProductJSON(
+						$("input[name=id]").val(),
+						$("input[name=name]").val(),
+						$("input[name=maxNoOfProducts]").val(),
+						$("input[name=minNrOfPalletSpaces]").val(),
+						),
+						function(result) {
+					window.location.replace("/products");
+					}, function(error) {
+					$("#error-modal").modal("show");
+					$("#error-text").text(error);
+				});
+				event.preventDefault();
+			});
+		});
 	</script>
 </body>
-
 </html>

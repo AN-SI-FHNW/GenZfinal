@@ -55,74 +55,38 @@
 		<form id="form" method="post">
 			<div class="form-group mb-3">
 				<div class="input-group">
-					<span class="input-group-text">Product ID </span><input
-						class="form-control" type="text" name="productId" readonly="">
+					<span class="input-group-text">Product ID </span>
+					<input class="form-control" type="text" name="productId" readonly="">
 				</div>
 			</div>
 			<div class="form-group mb-3">
 				<div class="input-group">
-					<span class="input-group-text">Name </span><input
-						class="form-control" type="text" name="name" readonly="">
+					<span class="input-group-text">Name </span>
+					<input class="form-control" type="text" name="name" readonly="">
 				</div>
 			</div>
 			<div class="form-group mb-3">
 				<div class="input-group">
-					<span class="input-group-text">Description </span><input
-						class="form-control" type="text" name="description" readonly="">
+					<span class="input-group-text">Max Number Of Products </span>
+					<input class="form-control" type="number" name="maxNoOfProducts" readonly="">
 				</div>
 			</div>
 			<div class="form-group mb-3">
 				<div class="input-group">
-					<span class="input-group-text">Weight </span><input
-						class="form-control" type="number" name="weight" readonly="">
+					<span class="input-group-text">minNrOfPalletSpaces </span>
+					<input class="form-control" type="number" name="minNrOfPalletSpaces" readonly="">
 				</div>
 			</div>
 			<div class="form-group mb-3">
 				<div class="input-group">
-					<span class="input-group-text">Max Number Of Products </span><input
-						class="form-control" type="number" name="maxNoOfProducts"
-						readonly="">
+					<span class="input-group-text">Order Quantity </span>
+					<input class="form-control" type="number" name="orderQuantity" min=1 value=1 required>
 				</div>
 			</div>
 			<div class="form-group mb-3">
 				<div class="input-group">
-					<span class="input-group-text">Pallet Size </span><input
-						class="form-control" type="number" name="palletSize" readonly="">
-				</div>
-			</div>
-			<div class="form-group mb-3">
-				<div class="input-group">
-					<span class="input-group-text">Product Price </span><input
-						class="form-control" type="number" name="productPrice" readonly="">
-				</div>
-			</div>
-			<div class="form-group mb-3">
-				<div class="input-group">
-					<span class="input-group-text">Available Quantity </span><input
-						class="form-control" type="number" name="availableQuantity"
-						readonly="">
-				</div>
-			</div>
-			<div class="form-group mb-3">
-				<div class="input-group">
-					<span class="input-group-text">Product Category </span><input
-						class="form-control" type="text" name="productCategory"
-						readonly=""> </select>
-				</div>
-			</div>
-			<div class="form-group mb-3">
-				<div class="input-group">
-					<span class="input-group-text">Order Quantity </span><input
-						class="form-control" type="number" name="orderQuantity" min=1
-						value=1 required>
-				</div>
-			</div>
-			<div class="form-group mb-3">
-				<div class="input-group">
-					<span class="input-group-text">Select Customer </span><select
-						required class="form-control" name="customerList"
-						id="customerList">
-					</select>
+					<span class="input-group-text">Select Customer </span>
+					<select required class="form-control" name="customerList" id="customerList"></select>
 				</div>
 			</div>
 			<div class="btn-group" role="group">
@@ -171,66 +135,51 @@
 	<script src="../assets/js/script.js"></script>
 	<script src="../assets/js/webapp.js"></script>
 	<script>
-		$(document)
-				.ready(
-						function() {
-							$(loadData());
+		$(document).ready(function () {
+			$(loadData());
 
-							function loadData() {
-								getCustomers(function(result) {
-									$.each(result, function(i, item) {
-										$('#customerList').append(
-												$('<option/>', {
-													value : item.id,
-													text : item.name
-												}));
-									});
+			function loadData() {
+				getCustomers(function (result) {
+					$.each(result, function (i, item) {
+						$('#customerList').append(
+								$('<option/>', {
+									value: item.id,
+									text: item.name
+								}));
+					});
+				});
+				productID = getURLParameter("id");
+
+				if (productID !== null) {
+					getProduct(productID, function (result) {
+						$("input[name=productId]").val(result["id"]);
+						$("input[name=name]").val(result["name"]);
+						$("input[name=maxNoOfProducts]").val(result["maxNoOfProducts"]);
+						$("input[name=minNrOfPalletSpaces]").val(result["minNrOfPalletSpaces"]);
+					});
+				}
+				getCart(function (result) {
+					document.getElementById("count").innerHTML = result.length;
+				});
+			}
+
+			$("#form").submit(
+					function (event) {
+						postOrder(getOrderJSON(
+										$("input[name=productId]").val(),
+										$("input[name=orderQuantity]").val(),
+										$("select[name=customerList]").val()),
+								function (result) {
+									window.location.replace("/orderlist");
+								},
+								function (error) {
+									$("#error-modal").modal("show");
+									$("#error-text").text(error);
 								});
-								productID = getURLParameter("id");
-								if (productID !== null) {
-									getProduct(productID, function(result) {
-										$("input[name=productId]").val(result["id"]);
-										$("input[name=name]").val(
-												result["name"]);
-										$("input[name=description]").val(
-												result["description"]);
-										$("input[name=weight]").val(
-												result["weight"]);
-										$("input[name=maxNoOfProducts]").val(
-												result["maxNoOfProducts"]);
-										$("input[name=palletSize]").val(
-												result["palletSize"]);
-										$("input[name=productPrice]").val(
-												result["productPrice"]);
-										$("input[name=availableQuantity]").val(
-												result["availableQuantity"]);
-										$("input[name=productCategory]").val(
-												result["productCategory"]);
-									});
-								}
-								getCart(function(result) {
-									document.getElementById("count").innerHTML = result.length;
-								});
-							}
+						event.preventDefault();
+					});
 
-							$("#form").submit(
-									function(event) {
-										postOrder(getOrderJSON($(
-												"input[name=productId]").val(), $(
-												"input[name=orderQuantity]")
-												.val(), $(
-												"select[name=customerList]")
-												.val()), function(result) {
-											window.location
-													.replace("/orderlist");
-										}, function(error) {
-											$("#error-modal").modal("show");
-											$("#error-text").text(error);
-										});
-										event.preventDefault();
-									});
-
-						});
+		});
 	</script>
 </body>
 

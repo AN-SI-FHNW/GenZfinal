@@ -96,13 +96,13 @@ public class ProductController {
 			order.setOrderDate(new Date());
 
 			// shipping cost calculation start
-			// Warehouse location is kept as fromCity which is a constant
+			// Warehouse location is kept as fromCanton which is a constant
 			String fromCanton = "Zürich"; //we have only 1 central warehouse in ZH
 			String toCanton = order.getCustomer().getCanton();
 
 			// Create variables
 			Double maxNoOfProducts = Double.valueOf(order.getProduct().getMaxNoOfProducts());
-			Double palSize = order.getProduct().getMinNrOfPalletSpaces();
+			Double minNrOfPalletSpaces = order.getProduct().getMinNrOfPalletSpaces();
 			Double orderQuantity = Double.valueOf(order.getOrderQuantity());
 
 			// Get km category from actual distance
@@ -124,7 +124,7 @@ public class ProductController {
 
 			// Get rounded up number of pallets (pal)
 			Double roundedRatio = Math.ceil(orderQuantity / maxNoOfProducts);
-			Double pal = Math.ceil(roundedRatio * palSize);
+			Double pal = Math.ceil(roundedRatio * minNrOfPalletSpaces);
 
 			// Loop all items of transportCost to find correct item with matching km and pal
 			Double shippingCost = 0.0;

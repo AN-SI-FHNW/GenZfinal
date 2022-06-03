@@ -116,24 +116,10 @@ function searchTable() {
     }
 }
 
-function getCustomerJSON(id, name, email, mobile, address, city, country) {
-    if (id === null) {
-        return JSON.stringify({
-            "name": name,
-            "email": email,
-            "mobile": mobile,
-            "address": address,
-            "city": city,
-            "country": country
-        });
+function getCustomerJSON(id, name, email, mobile, address, canton, country) {
+    let obj = {name, email, mobile, address, canton, country};
+    if (id) {
+        obj.id = id;
     }
-    return JSON.stringify({
-        "id": id,
-        "name": name,
-        "email": email,
-        "mobile": mobile,
-        "address": address,
-        "city": city,
-        "country": country
-    });
+    return JSON.stringify(obj);
 }

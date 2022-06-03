@@ -86,27 +86,34 @@
 			</div>
 			<div class="form-group mb-3">
 				<div class="input-group">
-					<span class="input-group-text">City </span><select
-						class="form-control" name="city"><option>Zürich</option>
-						<option>Geneva</option>
-						<option>Basel</option>
-						<option>Lausanne</option>
-						<option>Bern</option>
-						<option>Winterthur</option>
-						<option>Lucerne</option>
-						<option>St. Gallen</option>
-						<option>Lugano</option>
-						<option>Bienne</option>
-						<option>Thun</option>
-						<option>Bellinzona</option>
-						<option>Köniz</option>
-						<option>Fribourg</option>
-						<option>La Chaux-de-Fonds</option>
-						<option>Schaffhausen</option>
-						<option>Chur</option>
-						<option>Vernier</option>
-						<option>Uster</option>
-						<option>Sion</option>
+					<span class="input-group-text">Canton </span><select
+						class="form-control" name="canton">
+					<option>Zürich</option>
+					<option>Aargau</option>
+					<option>Appenzell I.Rh.</option>
+					<option>Appenzell A.Rh.</option>
+					<option>Bern</option>
+					<option>Basel-Landschaft</option>
+					<option>Basel-Stadt</option>
+					<option>Freiburg</option>
+					<option>Genf</option>
+					<option>Glarus</option>
+					<option>Graubünden</option>
+					<option>Jura</option>
+					<option>Luzern</option>
+					<option>Neuenburg</option>
+					<option>Niedwalden</option>
+					<option>Obwalden</option>
+					<option>Sankt Gallen</option>
+					<option>Schaffhausen</option>
+					<option>Solothurn</option>
+					<option>Schwyz</option>
+					<option>Thurgau</option>
+					<option>Tessin</option>
+					<option>Uri</option>
+					<option>Waadt</option>
+					<option>Wallis</option>
+					<option>Zug</option>
 					</select>
 				</div>
 			</div>
@@ -165,7 +172,7 @@
 							$("input[name=email]").val(result["email"]);
 							$("input[name=mobile]").val(result["mobile"]);
 							$("textarea[name=address]").val(result["address"]);
-							$("select[name=city]").val(result["city"]);
+							$("select[name=canton]").val(result["canton"]);
 							$("input[name=country]").val(result["country"]);
 						});
 					}
@@ -178,7 +185,7 @@
 										"input[name=email]").val(), $(
 										"input[name=mobile]").val(), $(
 										"textarea[name=address]").val(), $(
-										"select[name=city]").val(), $(
+										"select[name=canton]").val(), $(
 										"input[name=country]").val()),
 										function(result) {
 											window.location

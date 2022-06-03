@@ -22,24 +22,22 @@
 		<nav class="navbar navbar-light navbar-expand-md navigation-clean">
 			<div class="container">
 				<a class="navbar-brand" href="/">Generation Z</a>
-				<button data-bs-toggle="collapse" class="navbar-toggler"
-					data-bs-target="#navcol-1">
-					<span class="visually-hidden">Toggle navigation</span><span
-						class="navbar-toggler-icon"></span>
+				<button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+					<span class="visually-hidden">Toggle navigation</span>
+					<span class="navbar-toggler-icon"></span>
 				</button>
 				<a class="navbar nav-item nav-link" href="/productlist">Products</a>
-				<a class="navbar nav-item nav-link" href="/customerlist">My
-					Customers</a> <a class="navbar nav-item nav-link" href="/cartlist">My
-					Cart</a> <label style="color: red;" id="count"></label> <a
-					class="navbar nav-item nav-link" href="/orderlist">My Orders</a>
+				<a class="navbar nav-item nav-link" href="/customerlist">My Customers</a>
+				<a class="navbar nav-item nav-link" href="/cartlist">My Cart</a>
+				<label style="color: red;" id="count"></label>
+				<a class="navbar nav-item nav-link" href="/orderlist">My Orders</a>
 				<div class="collapse navbar-collapse" id="navcol-1">
 					<ul class="navbar-nav ms-auto">
-						<li class="nav-item dropdown"><a
-							class="dropdown-toggle nav-link" aria-expanded="false"
-							data-bs-toggle="dropdown" href="#">My Profile </a>
+						<li class="nav-item dropdown">
+							<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">My Profile </a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="/customer/profile">Edit
-									Profile</a><a class="dropdown-item" href="/logout">Logout </a>
+								<a class="dropdown-item" href="/customer/profile">Edit Profile</a>
+								<a class="dropdown-item" href="/logout">Logout </a>
 							</div></li>
 					</ul>
 				</div>
@@ -48,29 +46,20 @@
 	</div>
 	<div class="container">
 		<div class="page-header">
-			<h2 class="text-center">
-				<strong>Products</strong>
-			</h2>
+			<h2 class="text-center"><strong>Products</strong></h2>
 		</div>
-		<input id='myInput' onkeyup='searchTable()' type='text'
-			placeholder="search">
+		<input id='myInput' onkeyup='searchTable()' type='text' placeholder="search">
 		<div class="table-responsive">
 			<table class="table table-borderless">
 				<thead>
 					<tr>
 						<th>Product ID</th>
 						<th>Name</th>
-						<th>Description</th>
-						<th>Weight</th>
 						<th>Max Number Of Products</th>
-						<th>Pallet Size</th>
-						<th>Product Price</th>
-						<th>Available Quantity</th>
-						<th>Product Category</th>
+						<th>minNrOfPalletSpaces</th>
 					</tr>
 				</thead>
-				<tbody id="tableData">
-				</tbody>
+				<tbody id="tableData"></tbody>
 			</table>
 		</div>
 	</div>
@@ -79,92 +68,47 @@
 			<p class="copyright">Generation Z © 2022</p>
 		</footer>
 	</div>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="../assets/js/app.js"></script>
 	<script src="../assets/js/cart.js"></script>
 	<script src="../assets/js/product.js"></script>
 	<script src="../assets/js/script.js"></script>
 	<script src="../assets/js/webapp.js"></script>
 	<script>
-		$(document)
-				.ready(
-						function() {
-							$(loadData());
+		$(document).ready(function() {
+			$(loadData());
 
-							function loadData() {
-								getProducts(function(result) {
-									$("#tableData").empty();
-									$
-											.each(
-													result,
-													function(i, item) {
-														$("#tableData")
-																.append(
-																		$(
-																				"<tr>")
-																				.append(
-																						$(
-																								"<td>")
-																								.text(
-																										item.id),
-																						$(
-																								"<td>")
-																								.text(
-																										item.name),
-																						$(
-																								"<td>")
-																								.text(
-																										item.description),
-																						$(
-																								"<td>")
-																								.text(
-																										item.weight),
-																						$(
-																								"<td>")
-																								.text(
-																										item.maxNoOfProducts),
-																						$(
-																								"<td>")
-																								.text(
-																										item.palletSize),
-																						$(
-																								"<td>")
-																								.text(
-																										item.productPrice),
-																						$(
-																								"<td>")
-																								.text(
-																										item.availableQuantity),
-																						$(
-																								"<td>")
-																								.text(
-																										item.productCategory),
-																						$(
-																								"<td>")
-																								.html(
-																										'<div class="btn-group btn-group-sm" role="group"><a class="btn btn-light" role="button" href="/product/cart?id='
-																												+ encodeURIComponent(item.id)
-																												+ '"> <i class="fa fa-shopping-cart"  title="Add to cart"></i></a></div>')));
-													});
-								});
-								getCart(function(result) {
-									document.getElementById("count").innerHTML = result.length;
-								});
-							}
+			function loadData() {
+				getProducts(function(result) {
+					$("#tableData").empty();
+					$.each(result,
+							function(i, item) {
+								$("#tableData").append(
+										$("<tr>").append(
+												$("<td>").text(item.id),
+												$("<td>").text(item.name),
+												$("<td>").text(item.maxNoOfProducts),
+												$("<td>").text(item.minNrOfPalletSpaces),
+												$("<td>").html('<div class="btn-group btn-group-sm" role="group"><a class="btn btn-light" role="button" href="/product/cart?id='
+														+ encodeURIComponent(item.id)
+														+ '"> <i class="fa fa-shopping-cart"  title="Add to cart"></i></a></div>')));
+							});
+				});
+				getCart(function(result) {
+					document.getElementById("count").innerHTML = result.length;
+				});
+			}
 
-							$("#deleteData").click(
-									function() {
-										deleteProduct($(this).attr("data-id"),
-												function(result) {
-													$("#confirm-modal").modal(
-															"hide");
-													loadData();
-												});
-									});
-						});
+			$("#deleteData").click(
+					function() {
+						deleteProduct($(this).attr("data-id"),
+								function(result) {
+									$("#confirm-modal").modal("hide");
+									loadData();
+								});
+					});
+		});
 	</script>
 </body>
 

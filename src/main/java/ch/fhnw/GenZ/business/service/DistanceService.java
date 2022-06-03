@@ -28,7 +28,7 @@ public class DistanceService {
 		distanceRepository.deleteAll();
 	}
 
-	// Find element with distance data from city to city
+	// Find element with distance data from canton to canton
 	public Distance findByToCanton(String fromCanton, String toCanton) throws Exception {
 		return distanceRepository.findByFromCantonAndToCanton(fromCanton, toCanton);
 	}

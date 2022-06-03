@@ -69,7 +69,7 @@ public class Customer {
 	public void setAddress(String address) { this.address = address; }
 
 	public String getCanton() {
-		return mobile;
+		return canton;
 	}
 
 	public void setCanton(String canton) {

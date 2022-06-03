@@ -49,7 +49,7 @@ public class Product {
 		return minNrOfPalletSpaces;
 	}
 
-	public void setMinNrOfPalletSpaces(Double palletSize) {
-		this.minNrOfPalletSpaces = palletSize;
+	public void setMinNrOfPalletSpaces(Double minNrOfPalletSpaces) {
+		this.minNrOfPalletSpaces = minNrOfPalletSpaces;
 	}
 }
