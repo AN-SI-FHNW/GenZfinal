@@ -1,3 +1,8 @@
+/*
+ * Author: Kevin Pini		Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
+ */
+
 package ch.fhnw.GenZ.data.domain;
 
 import javax.persistence.Entity;
@@ -6,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -25,9 +29,7 @@ public class Customer {
 	private String mobile;
 	@NotEmpty(message = "Please provide an address.")
 	private String address;
-	private String city;
-	private Double latitude;
-	private Double longitude;
+	private String canton;
 	private String country;
 
 	@ManyToOne
@@ -66,36 +68,16 @@ public class Customer {
 		this.mobile = mobile;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getAddress() { return address; }
+
+	public void setAddress(String address) { this.address = address; }
+
+	public String getCanton() {
+		return canton;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public Double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	public Double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
+	public void setCanton(String canton) {
+		this.canton = canton;
 	}
 
 	public String getCountry() {

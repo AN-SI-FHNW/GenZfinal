@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2019. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+ * Authors: Kevin Pini, Moana Kleiner, Carla Kaufmann, Andrea Alec Simonek
+ * Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package onl.mrtn.security.config;
@@ -8,7 +9,6 @@ package onl.mrtn.security.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import onl.mrtn.security.service.TokenService;
-
 import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)

@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2019. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+ * Authors: Kevin Pini, Moana Kleiner, Carla Kaufmann, Andrea Alex Simonek
+ * Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package onl.mrtn.security.web;
@@ -9,7 +10,6 @@ import onl.mrtn.security.config.TokenSecurityProperties;
 import onl.mrtn.security.service.TokenService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+ * Author: Kevin Pini		Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package ch.fhnw.GenZ.controller;
@@ -22,18 +22,15 @@ public class UserController {
 	@Autowired
 	private AgentService agentService;
 
+	// Autowiring logger to log, register and login data to txt file
 	@Autowired
 	private LogController logController;
 
+	// Show different page views
 	@GetMapping("/login")
 	public String getLoginView() {
 		logController.newlog.info("Login Page accessed!");
 		return "user/login.html";
-	}
-
-	@GetMapping("/aboutus")
-	public String getAboutUsView() {
-		return "aboutus.html";
 	}
 
 	@GetMapping("/user/register")

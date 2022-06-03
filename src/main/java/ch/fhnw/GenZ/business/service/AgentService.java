@@ -1,6 +1,6 @@
-/* Andrea & Kevin based on template from:
- * Copyright (c) 2020. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+/*
+ * Author: Kevin Pini		Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package ch.fhnw.GenZ.business.service;
@@ -17,9 +17,7 @@ import ch.fhnw.GenZ.data.domain.CustomerOrder;
 import ch.fhnw.GenZ.data.repository.AgentRepository;
 import ch.fhnw.GenZ.data.repository.CustomerOrderRepository;
 import ch.fhnw.GenZ.data.repository.CustomerRepository;
-
 import java.util.List;
-
 import javax.validation.Valid;
 import javax.validation.Validator;
 
@@ -27,6 +25,7 @@ import javax.validation.Validator;
 @Validated
 public class AgentService {
 
+	// Autowiring to JPA repositories, password validator and encoder
 	@Autowired
 	private AgentRepository agentRepository;
 	@Autowired
@@ -38,6 +37,7 @@ public class AgentService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	// Save Agent and check if ID or email already exists and set password with passwordEncoder
 	public void saveAgent(@Valid Agent agent) throws Exception {
 		if (agent.getId() == null) {
 			if (agentRepository.findByEmail(agent.getEmail()) != null) {
@@ -50,15 +50,18 @@ public class AgentService {
 		agentRepository.save(agent);
 	}
 
+	// Get current Agent and show username
 	public Agent getCurrentAgent() {
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return agentRepository.findByEmail(user.getUsername());
 	}
 
+	// Get all agents
 	public List<Agent> getAllAgents() {
 		return agentRepository.findAll();
 	}
 
+	// Delete user by user ID
 	public void deleteUser(Long userId) {
 		for (CustomerOrder customerOrder : customerOrderRepository.findByAgentId(userId)) {
 			customerOrderRepository.deleteById(customerOrder.getId());

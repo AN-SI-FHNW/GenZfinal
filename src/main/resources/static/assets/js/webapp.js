@@ -1,3 +1,9 @@
+/*
+* Authors: Andrea Alex Simonek, Carla Kaufmann, Moana Kleiner, Kevin Pini
+* Date: 03.06.2022
+* Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
+*/
+
 serviceEndpointURL = window.location.protocol + "//" + window.location.host;
 
 function login(email, password, remember, callback) {

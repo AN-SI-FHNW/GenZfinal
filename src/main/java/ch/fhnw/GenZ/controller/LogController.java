@@ -1,3 +1,7 @@
+/*
+ * Author: Andrea Alec Simonek		Date: 03.06.2022
+ */
+
 package ch.fhnw.GenZ.controller;
 
 import org.slf4j.Logger;

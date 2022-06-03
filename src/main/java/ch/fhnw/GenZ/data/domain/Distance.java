@@ -1,3 +1,7 @@
+/*
+ * Author: Moana Kleiner		Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
+ */
 package ch.fhnw.GenZ.data.domain;
 
 import javax.persistence.Entity;
@@ -10,8 +14,8 @@ public class Distance {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String fromCity;
-	private String toCity;
+	private String fromCanton;
+	private String toCanton;
 	private Integer kilometers;
 
 	public Long getId() {
@@ -22,20 +26,20 @@ public class Distance {
 		this.id = id;
 	}
 
-	public String getFromCity() {
-		return fromCity;
+	public String getFromCanton() {
+		return fromCanton;
 	}
 
-	public void setFromCity(String fromCity) {
-		this.fromCity = fromCity;
+	public void setFromCanton(String fromCanton) {
+		this.fromCanton = fromCanton;
 	}
 
-	public String getToCity() {
-		return toCity;
+	public String getToCanton() {
+		return toCanton;
 	}
 
-	public void setToCity(String toCity) {
-		this.toCity = toCity;
+	public void setToCanton(String toCanton) {
+		this.toCanton = toCanton;
 	}
 
 	public Integer getKilometers() {

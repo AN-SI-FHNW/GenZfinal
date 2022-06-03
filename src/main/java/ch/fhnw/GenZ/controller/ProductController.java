@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2020. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+ * Author: Moana Kleiner		Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package ch.fhnw.GenZ.controller;
 
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.server.NotAcceptableStatusException;
 import org.springframework.web.server.ResponseStatusException;
-
 import ch.fhnw.GenZ.business.service.AgentService;
 import ch.fhnw.GenZ.business.service.CartService;
 import ch.fhnw.GenZ.business.service.CustomerService;
@@ -37,6 +34,7 @@ import ch.fhnw.GenZ.data.domain.TransportCost;
 @RequestMapping(path = "/product")
 public class ProductController {
 
+	// Autowiring different services
 	@Autowired
 	private CartService cartService;
 	@Autowired
@@ -52,6 +50,7 @@ public class ProductController {
 	@Autowired
 	private DistanceService distanceService;
 
+	// Get different pages
 	@GetMapping
 	public String getProductView() {
 		return "admin/product.html";
@@ -67,6 +66,7 @@ public class ProductController {
 		return "../admin/productEdit.html";
 	}
 
+	// Create customer cart, add products, add agent, save cart, lastly return productlist.html
 	@GetMapping("/cart")
 	public String cart(@RequestParam Long id) {
 		try {
@@ -82,6 +82,7 @@ public class ProductController {
 		return "../customer/productlist.html";
 	}
 
+	// Order process
 	@PostMapping("/order")
 	public ResponseEntity<Void> order(@RequestBody CustomerOrder order) {
 		try {
@@ -93,19 +94,17 @@ public class ProductController {
 			order.setOrderDate(new Date());
 
 			// shipping cost calculation start
-			// Warehouse location is kept as fromCity which is a constant
-			String fromCity = "Zürich"; //we have only 1 central warehouse in ZH
-			String toCity = order.getCustomer().getCity();
+			// Warehouse location is kept as fromCanton which is a constant
+			String fromCanton = "Zürich"; //we have only 1 central warehouse in ZH
+			String toCanton = order.getCustomer().getCanton();
 
-
+			// Create variables
 			Double maxNoOfProducts = Double.valueOf(order.getProduct().getMaxNoOfProducts());
-			Double palSize = order.getProduct().getPalletSize();
+			Double minNrOfPalletSpaces = order.getProduct().getMinNrOfPalletSpaces();
 			Double orderQuantity = Double.valueOf(order.getOrderQuantity());
 
-
-
 			// Get km category from actual distance
-			Distance distance = distanceService.findByToCity(fromCity, toCity);
+			Distance distance = distanceService.findByToCanton(fromCanton, toCanton);
 			Integer kilometers = distance.getKilometers();
 			Integer km = 0;
 			if (kilometers <= 30) {km = 30;}
@@ -122,9 +121,8 @@ public class ProductController {
 			else {km = 360;}
 
 			// Get rounded up number of pallets (pal)
-//			double palet = new Double (palSize / maxNoOfProducts * orderQuantity);
 			Double roundedRatio = Math.ceil(orderQuantity / maxNoOfProducts);
-			Double pal = Math.ceil(roundedRatio * palSize);
+			Double pal = Math.ceil(roundedRatio * minNrOfPalletSpaces);
 
 			// Loop all items of transportCost to find correct item with matching km and pal
 			Double shippingCost = 0.0;
@@ -146,6 +144,7 @@ public class ProductController {
 		return ResponseEntity.ok().build();
 	}
 
+	// Get orderview
 	@GetMapping("/buy")
 	public String getProductOrderView() {
 		return "../customer/order.html";

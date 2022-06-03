@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2019. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+ * Author: Moana Kleiner		Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package ch.fhnw.GenZ.config;
@@ -12,7 +12,6 @@ import ch.fhnw.GenZ.data.domain.Agent;
 import ch.fhnw.GenZ.data.domain.Distance;
 import ch.fhnw.GenZ.data.domain.TransportCost;
 import ch.fhnw.GenZ.data.domain.UserRole;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -39,6 +38,7 @@ import onl.mrtn.security.web.TokenLogoutHandler;
 @EnableTokenSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	// Autowiring different services and password encoder
 	@Autowired
 	private AgentService agentService;
 	@Autowired
@@ -52,16 +52,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private TokenService tokenService;
 
+	// Configure secure session
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER).and().requiresChannel()
-				.requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null).requiresSecure().and() // If the
-																										// X-Forwarded-Proto
-																										// header is
-																										// present,
-																										// redirect to
-																										// HTTPS
-																										// (Heroku)
+				.requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null).requiresSecure().and()
 				.csrf().requireCsrfProtectionMatcher(new CSRFRequestMatcher())
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().authorizeRequests()
 				.antMatchers("/", "/assets/**", "/user/**", "/login/**", "/adminlogin/**", "/aboutus/**",
@@ -76,10 +71,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	public void configure(WebSecurity web) throws Exception {
+	public void configure(WebSecurity web) {
 		web.ignoring().antMatchers("/h2-console/**");
 	}
 
+	// Configure authentication manager and build system admin
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
@@ -94,150 +90,196 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		}
 
-		// insert the distance data
+		// Warehouse located in Zürich
+		// Insert the distance data from cantons to zürich into JPA repository.
+		// Data from: https://www.travelmath.com/distance
 		try {
 			distanceService.deleteDistance();
-			String fromCity = "Zürich";
-			String toCity = "Zürich";
+			String fromCanton = "Zürich";
+			String toCanton = "Zürich";
 			Distance distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
 			distance.setKilometers(10);
 			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Geneva";
+			fromCanton = "Zürich";
+			toCanton = "Aargau";
 			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(224);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Basel";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(76);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Lausanne";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(174);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Bern";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(95);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Winterthur";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(20);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Lucerne";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(40);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "St. Gallen";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(62);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Lugano";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(129);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Bienne";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(55);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Thun";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(100);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Bellinzona";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(135);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Köniz";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(90);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Fribourg";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(123);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "La Chaux-de-Fonds";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(80);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Schaffhausen";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(60);
-			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Chur";
-			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
 			distance.setKilometers(50);
 			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Vernier";
+			fromCanton = "Zürich";
+			toCanton = "Appenzell I.Rh.";
 			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(40);
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(98);
 			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Uster";
+			fromCanton = "Zürich";
+			toCanton = "Appenzell A.Rh.";
 			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(30);
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(79);
 			distanceService.saveDistance(distance);
-			fromCity = "Zürich";
-			toCity = "Sion";
+			fromCanton = "Zürich";
+			toCanton = "Bern";
 			distance = new Distance();
-			distance.setFromCity(fromCity);
-			distance.setToCity(toCity);
-			distance.setKilometers(20);
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(130);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Basel-Landschaft";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(89);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Basel-Stadt";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(85);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Freiburg";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(159);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Genf";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(282);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Glarus";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(72);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Graubünden";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(121);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Jura";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(119);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Luzern";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(51);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Neuenburg";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(150);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Niedwalden";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(66);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Obwalden";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(76);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Sankt Gallen";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(85);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Schaffhausen";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(51);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Solothurn";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(98);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Schwyz";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(61);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Thurgau";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(45);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Tessin";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(180);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Uri";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(79);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Waadt";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(225);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Wallis";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(227);
+			distanceService.saveDistance(distance);
+			fromCanton = "Zürich";
+			toCanton = "Zug";
+			distance = new Distance();
+			distance.setFromCanton(fromCanton);
+			distance.setToCanton(toCanton);
+			distance.setKilometers(35);
 			distanceService.saveDistance(distance);
 
+
+			// Insert transport costs per distance and pallet into JPA repository
 			Integer km = 30;
 			Double pal = 1.0;
 			TransportCost transportCost = new TransportCost();

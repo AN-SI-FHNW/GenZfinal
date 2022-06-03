@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020. University of Applied Sciences and Arts Northwestern Switzerland FHNW.
- * All rights reserved.
+ * Author: Moana Kleiner		Date: 03.06.2022
+ * Inspired by Documentation of Andreas Martin (Lecturer FHNW): https://github.com/DigiPR/acrm-sandbox
  */
 
 package ch.fhnw.GenZ.business.service;
@@ -18,16 +18,19 @@ public class DistanceService {
 	@Autowired
 	private DistanceRepository distanceRepository;
 
+	// Save distance from zürich to canton
 	public void saveDistance(Distance distance) throws Exception {
 		distanceRepository.save(distance);
 	}
 
+	// Delete distance
 	public void deleteDistance() throws Exception {
 		distanceRepository.deleteAll();
 	}
 
-	public Distance findByToCity(String fromCity, String toCity) throws Exception {
-		return distanceRepository.findByFromCityAndToCity(fromCity, toCity);
+	// Find element with distance data from canton to canton
+	public Distance findByToCanton(String fromCanton, String toCanton) throws Exception {
+		return distanceRepository.findByFromCantonAndToCanton(fromCanton, toCanton);
 	}
 
 }
