@@ -119,13 +119,6 @@ The assets (HTML, CSS, JavaScript, image and font files) have been exported and 
 ## Deployment
 The User Client and the Web Server are represented as the project's front-end. The Webserver will host the website. The Application Server will consist of the business logic and the data access layer. A in-memory database is used to store data.
 
-## Installation Guide
-1.	Open GitHub link to our project: https://github.com/kevinpini/Generation_Z_IT_Project.git
-2.	Click on “Code”, and copy the link
-3.	Open IntelliJ IDEA and click on “file”, “new”, “project from version control”
-4.	Paste the link into the “URL” space and click on “clone”
-5.	After IntelliJ has opened the project, click on the “RUN” button  
-6.	Open Google Chrome and enter “localhost:8080” into the search bar to get on the login page. 
 
 ## User Guide
 The user guide is a quick explanation of how to use the web shop and it is separated into a user guide for administrators and one for the users. 
@@ -141,8 +134,6 @@ Administrator Guide:
 User (Customer) Guide:
 
 ![image](https://user-images.githubusercontent.com/80820037/171643588-b7fd0798-84b1-4309-8886-127170c42c5f.png)
-
-
 
 ## Features
 Administrator features:
