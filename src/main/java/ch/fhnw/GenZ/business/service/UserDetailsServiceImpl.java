@@ -24,6 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private AgentRepository agentRepository;
 
+    // Load user by username and assign role
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Agent agent = agentRepository.findByEmail(username);

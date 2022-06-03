@@ -24,13 +24,13 @@ import java.util.List;
 public class CartEndPoint {
 	@Autowired
 	private CartService cartService;
-
+	// API produces cart
 	@ApiOperation(value = "To get the cart", response = String.class)
 	@GetMapping(path = "/cart", produces = "application/json")
 	public List<CustomerCart> getCart() {
 		return cartService.findAllByAgentId();
 	}
-
+	//API deletes cart
 	@ApiOperation(value = "To delete the cart", response = String.class)
 	@DeleteMapping(path = "/cart/{cartId}")
 	public ResponseEntity<Void> deleteCart(@PathVariable(value = "cartId") String cartId) {

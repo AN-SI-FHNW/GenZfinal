@@ -23,6 +23,7 @@ public class CustomerService {
 	@Autowired
 	private AgentService agentService;
 
+	// Edit Customer: check if agent already exist by mobile number and id
 	public Customer editCustomer(@Valid Customer customer) throws Exception {
 		if (customer.getId() == null) {
 			if (customerRepository.findByMobile(customer.getMobile()) == null) {
@@ -40,11 +41,13 @@ public class CustomerService {
 		throw new Exception("Mobile number " + customer.getMobile() + " already assigned to a customer.");
 	}
 
+	// Delete customer by ID
 	public void deleteCustomer(Long customerId)
 	{
 		customerRepository.deleteById(customerId);
 	}
-	
+
+	// Find customer by ID
 	public Customer findCustomerById(Long customerId) throws Exception {
 		List<Customer> customerList = customerRepository.findByIdAndAgentId(customerId, agentService.getCurrentAgent().getId());
 		if(customerList.isEmpty()){
@@ -53,10 +56,12 @@ public class CustomerService {
 		return customerList.get(0);
 	}
 
+	// Find all customers
 	public List<Customer> findAllCustomers() {
 		return customerRepository.findByAgentId(agentService.getCurrentAgent().getId());
 	}
-	
+
+	// Find all customers for Admin (users)
 	public List<Customer> findAllCustomersForAdmin() {
 		return customerRepository.findAll();
 	}

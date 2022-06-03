@@ -22,6 +22,7 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 
+	// Edit product
 	public Product editProduct(@Valid Product product) throws Exception {
 		if (product.getId() != null) {
 			return productRepository.save(product);
@@ -29,14 +30,17 @@ public class ProductService {
 		throw new Exception("Product not found");
 	}
 
+	// Save product
 	public Product saveProduct(@Valid Product product) {
 		return productRepository.save(product);
 	}
 
+	// Delete product
 	public void deleteProduct(Long productId) {
 		productRepository.deleteById(productId);
 	}
 
+	// Find product by ID
 	public Product findProductById(Long productId) throws Exception {
 		Optional<Product> product = productRepository.findById(productId);
 		if (!product.isPresent()) {
@@ -45,6 +49,7 @@ public class ProductService {
 		return product.get();
 	}
 
+	// Find all products
 	public List<Product> findAllProducts() {
 		return productRepository.findAll();
 	}

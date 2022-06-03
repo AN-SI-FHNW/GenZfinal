@@ -28,6 +28,7 @@ public class OrderEndPoint {
 	@Autowired
 	private OrderService orderService;
 
+	// Add order/save order
 	@ApiOperation(value = "To add an order", response = String.class)
 	@PostMapping(path = "/order", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<CustomerOrder> postProduct(@RequestBody CustomerOrder order) {
@@ -48,6 +49,7 @@ public class OrderEndPoint {
 		return ResponseEntity.created(location).body(order);
 	}
 
+	// Get all orders
 	@ApiOperation(value = "To get all orders", response = String.class)
 	@GetMapping(path = "/order", produces = "application/json")
 	public List<CustomerOrder> getOrders() {

@@ -21,12 +21,13 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api") // /api/Products --> not just products but the right one
+@RequestMapping(path = "/api")
 @Api(value = "/api", description = "Customer End Point")
 public class CustomerEndpoint {
 	@Autowired
 	private CustomerService customerService;
 
+	// API adds/edits customer
 	@ApiOperation(value = "To add a customer", response = String.class)
 	@PostMapping(path = "/customer", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Customer> postCustomer(@RequestBody Customer customer) {
@@ -45,18 +46,21 @@ public class CustomerEndpoint {
 		return ResponseEntity.created(location).body(customer);
 	}
 
+	// API gets all customer for agents
 	@ApiOperation(value = "To get all customers for agent", response = String.class)
 	@GetMapping(path = "/customer", produces = "application/json")
 	public List<Customer> getCustomers() {
 		return customerService.findAllCustomers();
 	}
-	
+
+	// API gets all customers for administrator
 	@ApiOperation(value = "To get all customers for administrator", response = String.class)
 	@GetMapping(path = "/customerforadmin", produces = "application/json")
 	public List<Customer> getAllCustomers() {
 		return customerService.findAllCustomersForAdmin();
 	}
 
+	// API gets customer
 	@ApiOperation(value = "To get a customer", response = String.class)
 	@GetMapping(path = "/customer/{customerId}", produces = "application/json")
 	public ResponseEntity<Customer> getCustomer(@PathVariable(value = "customerId") String customerId) {
@@ -69,6 +73,7 @@ public class CustomerEndpoint {
 		return ResponseEntity.ok(customer);
 	}
 
+	// API updates customer
 	@ApiOperation(value = "To update a customer", response = String.class)
 	@PutMapping(path = "/customer/{customerId}", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Customer> putCustomer(@RequestBody Customer customer,
@@ -82,6 +87,7 @@ public class CustomerEndpoint {
 		return ResponseEntity.accepted().body(customer);
 	}
 
+	// API deletes customer
 	@ApiOperation(value = "To delete a customer", response = String.class)
 	@DeleteMapping(path = "/customer/{customerId}")
 	public ResponseEntity<Void> deleteCustomer(@PathVariable(value = "customerId") String customerId) {

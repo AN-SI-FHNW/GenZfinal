@@ -22,10 +22,12 @@ public class OrderService {
 	@Autowired
 	private CustomerOrderRepository orderRepository;
 
+	// Save order to repository
 	public CustomerOrder saveOrder(@Valid CustomerOrder order) {
 		return orderRepository.save(order);
 	}
 
+	// Find all orders from repository
 	public List<CustomerOrder> findAllOrders() {
 		return orderRepository.findAll();
 	}

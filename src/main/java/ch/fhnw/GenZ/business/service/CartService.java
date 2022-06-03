@@ -24,18 +24,22 @@ public class CartService {
 	@Autowired
 	private AgentService agentService;
 
+	// Save Cart
 	public CustomerCart saveCart(@Valid CustomerCart cart) 	{
 		return cartRepository.save(cart);
 	}
 
+	// Find all carts from current Agent and corresponding id
 	public List<CustomerCart> findAllByAgentId() {
 		return cartRepository.findByAgentId(agentService.getCurrentAgent().getId());
 	}
 
+	// Find all carts from current AgentId and ProductID
 	public List<CustomerCart> findByAgentIdAndProductId(Long productId) {
 		return cartRepository.findByAgentIdAndProductId(agentService.getCurrentAgent().getId(), productId);
 	}
 
+	// Delete cart
 	public void deleteCart(Long cartId) {
 		cartRepository.deleteById(cartId);
 	}

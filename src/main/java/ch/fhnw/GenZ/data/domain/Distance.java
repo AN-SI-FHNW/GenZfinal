@@ -10,8 +10,8 @@ public class Distance {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String fromCity;
-	private String toCity;
+	private String fromCanton;
+	private String toCanton;
 	private Integer kilometers;
 
 	public Long getId() {
@@ -22,20 +22,20 @@ public class Distance {
 		this.id = id;
 	}
 
-	public String getFromCity() {
-		return fromCity;
+	public String getFromCanton() {
+		return fromCanton;
 	}
 
-	public void setFromCity(String fromCity) {
-		this.fromCity = fromCity;
+	public void setFromCanton(String fromCity) {
+		this.fromCanton = fromCity;
 	}
 
-	public String getToCity() {
-		return toCity;
+	public String getToCanton() {
+		return toCanton;
 	}
 
-	public void setToCity(String toCity) {
-		this.toCity = toCity;
+	public void setToCanton(String toCity) {
+		this.toCanton = toCity;
 	}
 
 	public Integer getKilometers() {

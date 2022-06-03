@@ -18,14 +18,17 @@ public class DistanceService {
 	@Autowired
 	private DistanceRepository distanceRepository;
 
+	// Save distance from zürich to canton
 	public void saveDistance(Distance distance) throws Exception {
 		distanceRepository.save(distance);
 	}
 
+	// Delete distance
 	public void deleteDistance() throws Exception {
 		distanceRepository.deleteAll();
 	}
 
+	// Find element with distance data from city to city
 	public Distance findByToCity(String fromCity, String toCity) throws Exception {
 		return distanceRepository.findByFromCityAndToCity(fromCity, toCity);
 	}

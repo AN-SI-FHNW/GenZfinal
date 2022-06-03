@@ -20,14 +20,17 @@ public class TransportCostService {
 	@Autowired
 	private TransportCostRepository transportCostRepository;
 
+	// Save transport cost to repository
 	public void saveTransportCost(TransportCost transportCost) throws Exception {
 		transportCostRepository.save(transportCost);
 	}
 
+ 	// delete transport cost from repository
 	public void deleteTransportCost() throws Exception {
 		transportCostRepository.deleteAll();
 	}
 
+	// Get all transport cost from repository
 	public List<TransportCost> getAllTransportCost() throws Exception {
 		return transportCostRepository.findAll();
 	}
