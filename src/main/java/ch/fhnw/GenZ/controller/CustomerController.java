@@ -17,6 +17,7 @@ import ch.fhnw.GenZ.data.domain.UserRole;
 @RequestMapping(path = "/customer")
 public class CustomerController {
 
+	// Show customer view / admin view, depending on authority
 	@GetMapping
 	public String getCustomerView(Authentication authentication) {
 		String role = null;
@@ -29,11 +30,13 @@ public class CustomerController {
 		return "customer/landing.html";
 	}
 
+	// Show customer customerCreate page
 	@GetMapping("/create")
 	public String getCustomerCreateView() {
 		return "../customer/customerCreate.html";
 	}
 
+	// Show customerEdit page
 	@GetMapping("/edit")
 	public String getCustomerEditView() {
 		return "../customer/customerEdit.html";

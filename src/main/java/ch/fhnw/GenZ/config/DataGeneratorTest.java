@@ -20,6 +20,7 @@ public class DataGeneratorTest {
         demoUser();
     }
 
+    // Create demo user
     private void demoUser() throws Exception {
         Agent agentUser = new Agent();
         agentUser.setEmail("user@user.com");

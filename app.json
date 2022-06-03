@@ -1,12 +1,10 @@
 {
-  "name": "acrm",
-  "description": "Minimal Agency Customer Relationship Management Demo APP",
-  "website": "https://andreasmartin.ch",
+  "name": "GenZ",
+  "description": "Webshop GenZ",
   "env": {
     "TOKEN_SECRET": {
       "description": "A secret key for verifying the integrity of JWT.",
       "generator": "secret"
     }
-  },
-  "addons": [ "heroku-postgresql" ]
+  }
 }

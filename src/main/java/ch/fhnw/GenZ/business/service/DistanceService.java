@@ -29,8 +29,8 @@ public class DistanceService {
 	}
 
 	// Find element with distance data from city to city
-	public Distance findByToCity(String fromCity, String toCity) throws Exception {
-		return distanceRepository.findByFromCityAndToCity(fromCity, toCity);
+	public Distance findByToCanton(String fromCanton, String toCanton) throws Exception {
+		return distanceRepository.findByFromCantonAndToCanton(fromCanton, toCanton);
 	}
 
 }

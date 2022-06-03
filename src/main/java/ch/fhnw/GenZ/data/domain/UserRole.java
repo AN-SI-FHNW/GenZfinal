@@ -6,6 +6,5 @@
 package ch.fhnw.GenZ.data.domain;
 
 public enum UserRole {
-
 	USER, ADMINISTRATOR
 }

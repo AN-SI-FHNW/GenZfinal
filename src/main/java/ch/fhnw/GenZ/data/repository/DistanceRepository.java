@@ -13,6 +13,6 @@ import ch.fhnw.GenZ.data.domain.Distance;
 @Repository
 public interface DistanceRepository extends JpaRepository<Distance, Long> {
 
-	Distance findByFromCityAndToCity(String fromCity, String toCity);
+	Distance findByFromCantonAndToCanton(String fromCanton, String toCanton);
 
 }

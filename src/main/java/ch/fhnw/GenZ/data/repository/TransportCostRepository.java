@@ -13,6 +13,6 @@ import ch.fhnw.GenZ.data.domain.TransportCost;
 @Repository
 public interface TransportCostRepository extends JpaRepository<TransportCost, Long> {
 
-	TransportCost findByKmAndPal(String fromCity, String toCity);
+	TransportCost findByKmAndPal(String fromCanton, String toCanton);
 
 }

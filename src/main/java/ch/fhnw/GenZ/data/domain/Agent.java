@@ -27,7 +27,6 @@ public class Agent {
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // only create object property from JSON
 	@NotEmpty(message = "Please provide a password.")
 	private String password;
-	// @JsonIgnore
 	private UserRole role;
 	@Transient // will not be stored in DB
 	private String remember;

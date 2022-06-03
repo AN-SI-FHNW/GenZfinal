@@ -15,7 +15,6 @@ public class Product {
 	@GeneratedValue
 	private Long id;
 
-	private Long supplierId;
 	@NotEmpty(message = "Please provide a name.")
 	private String name;
 	private Integer maxNoOfProducts;
@@ -28,14 +27,6 @@ public class Product {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getSupplierId() {
-		return supplierId;
-	}
-
-	public void setSupplierId(Long supplierId) {
-		this.supplierId = supplierId;
 	}
 
 	public String getName() {

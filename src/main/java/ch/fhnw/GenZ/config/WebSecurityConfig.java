@@ -12,7 +12,6 @@ import ch.fhnw.GenZ.data.domain.Agent;
 import ch.fhnw.GenZ.data.domain.Distance;
 import ch.fhnw.GenZ.data.domain.TransportCost;
 import ch.fhnw.GenZ.data.domain.UserRole;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -39,6 +38,7 @@ import onl.mrtn.security.web.TokenLogoutHandler;
 @EnableTokenSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	// Autowiring different services and password encoder
 	@Autowired
 	private AgentService agentService;
 	@Autowired
@@ -52,16 +52,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private TokenService tokenService;
 
+	// Configure secure session
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER).and().requiresChannel()
-				.requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null).requiresSecure().and() // If the
-																										// X-Forwarded-Proto
-																										// header is
-																										// present,
-																										// redirect to
-																										// HTTPS
-																										// (Heroku)
+				.requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null).requiresSecure().and()
 				.csrf().requireCsrfProtectionMatcher(new CSRFRequestMatcher())
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().authorizeRequests()
 				.antMatchers("/", "/assets/**", "/user/**", "/login/**", "/adminlogin/**", "/aboutus/**",
@@ -76,10 +71,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	public void configure(WebSecurity web) throws Exception {
+	public void configure(WebSecurity web) {
 		web.ignoring().antMatchers("/h2-console/**");
 	}
 
+	// Configure authentication manager and build system admin
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
@@ -95,7 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 
 		// Warehouse located in Zürich
-		// insert the distance data from cantons to zürich into JPA repository.
+		// Insert the distance data from cantons to zürich into JPA repository.
 		// Data from: https://www.travelmath.com/distance
 		try {
 			distanceService.deleteDistance();
@@ -283,6 +279,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			distanceService.saveDistance(distance);
 
 
+			// Insert transport costs per distance and pallet into JPA repository
 			Integer km = 30;
 			Double pal = 1.0;
 			TransportCost transportCost = new TransportCost();

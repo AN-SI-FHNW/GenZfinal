@@ -22,18 +22,15 @@ public class UserController {
 	@Autowired
 	private AgentService agentService;
 
+	// Autowiring logger to log, register and login data to txt file
 	@Autowired
 	private LogController logController;
 
+	// Show different page views
 	@GetMapping("/login")
 	public String getLoginView() {
 		logController.newlog.info("Login Page accessed!");
 		return "user/login.html";
-	}
-
-	@GetMapping("/aboutus")
-	public String getAboutUsView() {
-		return "aboutus.html";
 	}
 
 	@GetMapping("/user/register")

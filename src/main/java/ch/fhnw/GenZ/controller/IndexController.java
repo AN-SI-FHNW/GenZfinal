@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path = "/") //NOT REQUIRED NECCESARY
+@RequestMapping(path = "/")
 public class IndexController {
 
+    // Get index page
     @GetMapping
     public String getIndexView(){
         return "index.html";

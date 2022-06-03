@@ -25,12 +25,14 @@ import java.util.List;
 public class AgentEndPoint {
 	@Autowired
 	private AgentService agentService;
+
 	// API produces all users
 	@ApiOperation(value = "To get all users", response = String.class)
 	@GetMapping(path = "/user", produces = "application/json")
 	public List<Agent> getAllUsers() {
 		return agentService.getAllAgents();
 	}
+
 	// Api deletes user
 	@ApiOperation(value = "To delete a user", response = String.class)
 	@DeleteMapping(path = "/user/{userId}")
@@ -42,5 +44,4 @@ public class AgentEndPoint {
 		}
 		return ResponseEntity.accepted().build();
 	}
-
 }

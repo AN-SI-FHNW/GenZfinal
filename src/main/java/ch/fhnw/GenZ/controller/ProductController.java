@@ -36,6 +36,7 @@ import ch.fhnw.GenZ.data.domain.TransportCost;
 @RequestMapping(path = "/product")
 public class ProductController {
 
+	// Autowiring different services
 	@Autowired
 	private CartService cartService;
 	@Autowired
@@ -51,6 +52,7 @@ public class ProductController {
 	@Autowired
 	private DistanceService distanceService;
 
+	// Get different pages
 	@GetMapping
 	public String getProductView() {
 		return "admin/product.html";
@@ -66,6 +68,7 @@ public class ProductController {
 		return "../admin/productEdit.html";
 	}
 
+	// Create customer cart, add products, add agent, save cart, lastly return productlist.html
 	@GetMapping("/cart")
 	public String cart(@RequestParam Long id) {
 		try {
@@ -81,6 +84,7 @@ public class ProductController {
 		return "../customer/productlist.html";
 	}
 
+	// Order process
 	@PostMapping("/order")
 	public ResponseEntity<Void> order(@RequestBody CustomerOrder order) {
 		try {
@@ -93,18 +97,16 @@ public class ProductController {
 
 			// shipping cost calculation start
 			// Warehouse location is kept as fromCity which is a constant
-			String fromCity = "Zürich"; //we have only 1 central warehouse in ZH
-			String toCity = order.getCustomer().getCity();
+			String fromCanton = "Zürich"; //we have only 1 central warehouse in ZH
+			String toCanton = order.getCustomer().getCanton();
 
-
+			// Create variables
 			Double maxNoOfProducts = Double.valueOf(order.getProduct().getMaxNoOfProducts());
 			Double palSize = order.getProduct().getMinNrOfPalletSpaces();
 			Double orderQuantity = Double.valueOf(order.getOrderQuantity());
 
-
-
 			// Get km category from actual distance
-			Distance distance = distanceService.findByToCity(fromCity, toCity);
+			Distance distance = distanceService.findByToCanton(fromCanton, toCanton);
 			Integer kilometers = distance.getKilometers();
 			Integer km = 0;
 			if (kilometers <= 30) {km = 30;}
@@ -121,7 +123,6 @@ public class ProductController {
 			else {km = 360;}
 
 			// Get rounded up number of pallets (pal)
-//			double palet = new Double (palSize / maxNoOfProducts * orderQuantity);
 			Double roundedRatio = Math.ceil(orderQuantity / maxNoOfProducts);
 			Double pal = Math.ceil(roundedRatio * palSize);
 
@@ -145,6 +146,7 @@ public class ProductController {
 		return ResponseEntity.ok().build();
 	}
 
+	// Get orderview
 	@GetMapping("/buy")
 	public String getProductOrderView() {
 		return "../customer/order.html";
