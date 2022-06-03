@@ -51,8 +51,6 @@ Interpretation
 - Max 15 piece of product p3 can be shipped with 2.5 pallet spaces. If only 15 piece of product p3 is ordered an nothing else you need 3 pallet spaces because at the end of an order the pallet spaces are rounded up.
 - Max 30 pieces of product p3 can be shipped with 5 pallet spaces.
 - 1 piece of product p3 also needs 2.5 pallet spaces. 
-- It’s possible to pile different products. An order of 12 piece of p2 and 5 piece of p1 needs 4 pallet spaces. 12 piece of p2 need at least 4 pallet spaces, 5 piece of p1 need at least 1.2 pallet spaces. therefore together they need at least 4 pallet spaces. 2 products of p2 need 0.4 pallet
-spaces and 5 piece of p1 need 0.24 pallet spaces, togehter 0.64 pallet spaces.
 
 ### User Roles and Permissions
 
